@@ -3,18 +3,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\About;
+use App\Models\Category;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
-class AboutController extends Controller
+class CategoryController extends Controller
 {
     // Display all About sections
-    public function AllAbouts()
+    public function index()
     {
-        $abouts = About::all();
-        return view('admin.backend.abouts.all_about', compact('abouts'));
+        $category = Category::get();
+        dd($category);
+        return view('admin.backend.abouts.all_about', compact('category'));
     }
 
     // Show the form for creating a new About section

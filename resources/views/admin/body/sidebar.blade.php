@@ -14,7 +14,7 @@
 
                 <!-- Home Section -->
                 <li>
-                    <a href="" class="has-arrow">
+                    <a href="{{ route('category.list') }}" class="has-arrow">
                         <i data-feather="layout"></i>
                         <span data-key="t-apps">Category</span>
                     </a>

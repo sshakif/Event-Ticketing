@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\CategoryController;
 
 
 //Frontend Route List
@@ -31,7 +32,7 @@ Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admi
 Route::middleware('admin')->group(function(){
 
     //For Category
-    Route::get('/profile', [ProfileController::class, 'show'])->name('category.list');
+    Route::get('/category', [CategoryController::class, 'index'])->name('category.list');
 
 });
 
