@@ -17,8 +17,10 @@
 
 
                         <div class="page-title-right">
-                            <a href=""><button class="btn btn-success">Add About
-                                    Section</button></a>
+                            @canAny(['create-category'])
+                                <a href=""><button class="btn btn-success">Add About
+                                        Section</button></a>
+                            @endcan
 
                         </div>
                     </div>
@@ -60,17 +62,21 @@
 
 
                                     <td>
-                                        <a href="">
-                                            <button class="btn btn-info btn-sm">Edit</button>
-                                        </a>
-                                        <form id="delete-form-{{ $category->id }}" action="" method="POST"
-                                            style="display:inline;">
-                                            @csrf
-                                            <button type="button" class="btn btn-danger btn-sm delete-button"
-                                                data-id="{{ $category->id }}">
-                                                Delete
-                                            </button>
-                                        </form>
+                                        @canAny(['edit-category'])
+                                            <a href="">
+                                                <button class="btn btn-info btn-sm">Edit</button>
+                                            </a>
+                                        @endcan
+                                        @canAny(['delete-category'])
+                                            <form id="delete-form-{{ $category->id }}" action="" method="POST"
+                                                style="display:inline;">
+                                                @csrf
+                                                <button type="button" class="btn btn-danger btn-sm delete-button"
+                                                    data-id="{{ $category->id }}">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </td>
 
                                 </tr>
