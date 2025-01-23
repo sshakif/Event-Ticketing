@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 //Frontend Route List
 Route::get('/', [UserController::class, 'Index'])->name('index');
 Route::get('/about', [UserController::class, 'About'])->name('about');
-
+Route::get('/events', [UserController::class, 'Events'])->name('events');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

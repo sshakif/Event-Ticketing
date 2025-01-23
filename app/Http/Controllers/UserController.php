@@ -29,7 +29,16 @@ class UserController extends Controller
 
     public function index()
     {
+        
         return view('frontend.index');
+    }
+
+    public function About(){
+        return view('frontend.about');
+    }
+
+    public function Events(){
+        return view('frontend.events');
     }
 }
 

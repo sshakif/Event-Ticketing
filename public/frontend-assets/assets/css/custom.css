@@ -1,0 +1,35 @@
+.catagory-card{
+display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.catagory-card .catagory-img{
+    width: 180px;
+    height: 180px;
+    overflow: hidden;
+    border-radius:50%;
+    overflow: hidden;
+    border: 5px solid rgb(58, 5, 75);
+}.catagory-img img{
+    height: 100%;
+    width: 100%;
+}
+.catagory-card b{
+    padding: 0px 24px;
+    margin-top: 12px;
+}
+.slider {
+    position: relative;
+    width: 400px;
+    height: 200px;
+    overflow: hidden;
+}
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+.slide {
+    min-width: 400px;
+    height: 200px;
+}
