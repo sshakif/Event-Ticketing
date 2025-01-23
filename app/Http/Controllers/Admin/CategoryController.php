@@ -13,9 +13,9 @@ class CategoryController extends Controller
     // Display all About sections
     public function index()
     {
-        $category = Category::get();
-        dd($category);
-        return view('admin.backend.abouts.all_about', compact('category'));
+        $categories = Category::get();
+        // dd($categories);
+        return view('admin.backend.category.categoryList', compact('categories'));
     }
 
     // Show the form for creating a new About section
