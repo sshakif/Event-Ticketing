@@ -21,17 +21,18 @@
                         </a>
                     </li>
                 @endcan
-
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow">
-                        <i data-feather="crosshair"></i>
-                        <span data-key="t-email">User Management</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('assign.role') }}">User List</a></li>
-                        <li><a href="{{ route('role') }}">Roles & Permissions</a></li>
-                    </ul>
-                </li>
+                @canAny(['admin'])
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i data-feather="crosshair"></i>
+                            <span data-key="t-email">User Management</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ route('assign.role') }}">User List</a></li>
+                            <li><a href="{{ route('role') }}">Roles & Permissions</a></li>
+                        </ul>
+                    </li>
+                @endcan
 
         </div>
     </div>

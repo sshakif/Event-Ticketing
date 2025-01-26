@@ -27,13 +27,47 @@ class UserManagementController extends Controller
         $search = $request->input('search');
         $users = User::where('name', 'like', "%$search%")
                      ->orWhere('email', 'like', "%$search%")
-                     ->latest()->paginate(6);
+                     ->orderBy('id', 'ASC')->paginate(6);
+
         $roles = Role::all();
 
         return view('admin.backend.user-management.user-list.user', [
             'users' => $users,
             'roles' => $roles,
         ]);
+    }
+
+    public function userStore(Request $request){
+        try {
+            DB::beginTransaction();
+
+
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:4',
+            ]);
+
+            $user = User::create([
+                'name' => $validatedData['name'],
+                'email' => $validatedData['email'],
+                'password' => bcrypt($validatedData['password']),
+            ]);
+
+            // $role = Role::where('name', 'user')->first();
+
+            // if ($role) {
+            //     $user->assignRole($role);
+            // }
+
+            DB::commit();
+
+            return back()->with('success', 'User created successfully.');
+        } catch (\Exception $e) {
+             DB::rollBack();
+
+             return back()->with('danger', $e->getMessage());
+        }
     }
 
 
@@ -125,6 +159,10 @@ class UserManagementController extends Controller
         $role = Role::where('name', $validatedData['role'])->firstOrFail();
 
         $user->assignRole($role);
+
+        $user->role =  $request->input('role');
+        $user->save();
+
 
         return redirect()->back()->with('success', 'Role assigned to user successfully.');
     }

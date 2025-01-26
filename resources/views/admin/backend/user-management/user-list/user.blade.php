@@ -14,7 +14,14 @@
 
                             <h4 class="mb-sm-0 font-size-18 mt-2">User List</h4>
                         </div>
+                        <div class="page-title-right">
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Create
+                                User
+                            </button>
+                        </div>
                     </div>
+
+
 
                     @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -65,12 +72,21 @@
 
 
 
+                                        @if (Auth::check())
+                                            @if (Auth::user()->role == 'super-admin')
+                                                <button class=" btn btn-info btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $key }}">
 
-                                        <button class=" btn btn-info btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal{{ $key }}">
+                                                    Assign Role
+                                                </button>
+                                            @elseif (Auth::user()->role == 'admin' && $user->role != 'super-admin')
+                                                <button class=" btn btn-info btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal{{ $key }}">
 
-                                            Assign Role
-                                        </button>
+                                                    Assign Role
+                                                </button>
+                                            @endif
+                                        @endif
 
                                     </td>
                                 </tr>
@@ -105,7 +121,8 @@
                                                                             <div class="from-control">
                                                                                 <select name="role" class="form-control">
                                                                                     @foreach ($roles as $role)
-                                                                                        <option value="{{ $role->name }}">
+                                                                                        <option
+                                                                                            value="{{ $role->name }}">
                                                                                             {{ $role->name }}</option>
                                                                                     @endforeach
                                                                                 </select>
@@ -143,7 +160,54 @@
         </div> <!-- container-fluid -->
     </div>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create User</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ps-widget bgc-white bdrs4 p30  overflow-hidden position-relative">
 
+                        <div class="col-xl">
+                            <form class="form-style1" action="{{ route('store.user') }}" method="post">
+                                @csrf
+                                <div class="row">
+
+                                    <div class="mb20">
+                                        <h5>Name </h5>
+
+                                        <input type="text" class="form-control" name="name" placeholder="">
+                                    </div>
+                                    <div class="mb20">
+                                        <h5>Email </h5>
+
+                                        <input type="text" class="form-control" name="email" placeholder="">
+                                    </div>
+                                    <div class="mb20">
+                                        <h5>Password </h5>
+
+                                        <input type="password" class="form-control" name="password" placeholder="">
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="text-start">
+                                            <button type="submit" class="btn btn-info btn-sm mt-2">
+                                                Create Role
+                                                <i class="fal fa-arrow-right-long"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <!-- Fix Delete Confirmation -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {

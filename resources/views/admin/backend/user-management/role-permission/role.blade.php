@@ -66,22 +66,38 @@
 
                                     <td class="vam ">
                                         <div class="d-flex">
-                                            @if ($role->name != 'Super Admin' && $role->name != 'Users')
-                                                <button class="btn btn-info btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal1{{ $role->id }}">Edit</button>
-                                                <form action="{{ route('roles.delete', $role->id) }}"
-                                                    id="delete{{ $role->id }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
+                                            @if (Auth::check())
+                                                @if (Auth::user()->role == 'super-admin')
+                                                    <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal1{{ $role->id }}">Edit</button>
+                                                    <form action="{{ route('roles.delete', $role->id) }}"
+                                                        id="delete{{ $role->id }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
 
-                                                    <a class="btn btn-danger btn-sm delete-button ms-2" href=""
-                                                        type="submit"
-                                                        onclick="event.preventDefault(); document.getElementById('delete{{ $role->id }}').submit();"
-                                                        class="remove">
-                                                        Delete
-                                                    </a>
-                                                </form>
+                                                        <a class="btn btn-danger btn-sm delete-button ms-2" href=""
+                                                            type="submit"
+                                                            onclick="event.preventDefault(); document.getElementById('delete{{ $role->id }}').submit();">
+                                                            Delete
+                                                        </a>
+                                                    </form>
+                                                @elseif (Auth::user()->role == 'admin' && $role->name != 'super-admin')
+                                                    <button class="btn btn-info btn-sm" data-bs-toggle="modal"
+                                                        data-bs-target="#exampleModal1{{ $role->id }}">Edit</button>
+                                                    <form action="{{ route('roles.delete', $role->id) }}"
+                                                        id="delete{{ $role->id }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+
+                                                        <a class="btn btn-danger btn-sm delete-button ms-2" href=""
+                                                            type="submit"
+                                                            onclick="event.preventDefault(); document.getElementById('delete{{ $role->id }}').submit();">
+                                                            Delete
+                                                        </a>
+                                                    </form>
+                                                @endif
                                             @endif
+
                                         </div>
 
                                     </td>
