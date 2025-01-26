@@ -13,24 +13,14 @@
                 </li>
 
                 <!-- Home Section -->
-                <li>
-                    <a href="{{ route('category.list') }}">
-                        <i data-feather="layout"></i>
-                        <span data-key="t-apps">Category</span>
-                    </a>
-                </li>
-
-                {{-- <li>
-                    <a class="has-arrow">
-                        <i data-feather="layout"></i>
-                        <span data-key="t-apps">User Management</span>
-                    </a>
-
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="">User List</a></li>
-                        <li><a href="">Roles & Permissions</a></li>
-                    </ul>
-                </li> --}}
+                @canAny(['category-mangement'])
+                    <li>
+                        <a href="{{ route('category.list') }}">
+                            <i data-feather="layout"></i>
+                            <span data-key="t-apps">Category</span>
+                        </a>
+                    </li>
+                @endcan
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow">
@@ -38,8 +28,8 @@
                         <span data-key="t-email">User Management</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="">All Services</a></li>
-                        <li><a href="">Add Services</a></li>
+                        <li><a href="{{ route('assign.role') }}">User List</a></li>
+                        <li><a href="{{ route('role') }}">Roles & Permissions</a></li>
                     </ul>
                 </li>
 
