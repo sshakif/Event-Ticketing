@@ -11,6 +11,11 @@ class Category extends Model
     protected $table = 'category';
     protected $fillable = [
         'name',
-        'note'
+        'note',
+        'file_path',
+        'mim_type',
+        'created_by',
+        'updated_by'
+
     ];
 }

@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
+
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -14,83 +16,68 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::get();
-        // dd($categories);
+
         return view('admin.backend.category.categoryList', compact('categories'));
     }
 
-    // Show the form for creating a new About section
-    public function AddAbouts()
-    {
-        return view('admin.backend.abouts.add_abouts');
-    }
 
     // Store a new About section
-    public function StoreAbouts(Request $request)
+    public function Store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+
+        $validate=  $request->validate([
+            'name' => 'required|string|max:255',
+            'note' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,svg|max:10240',
-            'video_url' => 'nullable|url',
+
         ]);
 
         $imagePath = null;
         if ($request->hasFile('image')) {
             $image = $request->file('image');
+            $mime_type = $image->getClientMimeType();
             $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
 
 
-            if (!file_exists(public_path('upload/about_images'))) {
-                mkdir(public_path('upload/about_images'), 0777, true);
+            if (!file_exists(public_path('upload/category'))) {
+                mkdir(public_path('upload/category'), 0777, true);
             }
 
-            $image->move(public_path('upload/about_images'), $imageName);
-            $imagePath = 'upload/about_images/' . $imageName;
+            $image->move(public_path('upload/category'), $imageName);
+            $imagePath = 'upload/category/' . $imageName;
         }
 
-        $videoUrl = $request->video_url;
-        if ($videoUrl) {
-            if (strpos($videoUrl, 'youtube.com/watch?v=') !== false) {
-                $videoUrl = str_replace("watch?v=", "embed/", $videoUrl);
-            } elseif (strpos($videoUrl, 'youtu.be/') !== false) {
-                $videoUrl = str_replace("youtu.be/", "www.youtube.com/embed/", $videoUrl);
-            }
-        }
+        Category::create([
+            'name' => $request->name,
+            'note' => $request->note,
+            'file_path'=>$request->$imagePath,
+            'mime_type'=>$mime_type,
+            'created_by'=>Auth::user()->id
 
-        About::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'image' => $imagePath,
-            'video_url' => $request->video_url,
+
         ]);
 
-        return redirect()->route('all.abouts')->with('success', 'About section added successfully!');
+        return redirect()->route('category.list')->with('success', 'Category added successfully!');
     }
 
-    // Show the form for editing the About section
-    public function EditAbouts($id)
-    {
-        $about = About::findOrFail($id);
-        return view('admin.backend.abouts.edit_abouts', compact('about'));
-    }
 
     // Update an existing About section
-    public function UpdateAbouts(Request $request, $id)
+    public function Edit(Request $request, $id)
     {
-        $about = About::findOrFail($id);
+        $category = Category::findOrFail($id);
 
         $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'name' => 'required|string|max:255',
+            'note' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,svg|max:2048',
-            'video_url' => 'nullable|url',
+            'updated_by'=>Auth::user()->id
         ]);
 
-        $imagePath = $about->image;
+        $imagePath = $category->file_path;
 
         if ($request->file('image')) {
-            if ($about->image && file_exists(public_path($about->image))) {
-                unlink(public_path($about->image));
+            if ($category->image && file_exists(public_path($category->image))) {
+                unlink(public_path($category->image));
             }
 
             $image = $request->file('image');
@@ -108,34 +95,24 @@ class CategoryController extends Controller
             $imagePath = 'upload/about_images/' . $imageName;
         }
 
-
-        $videoUrl = $request->video_url;
-        if ($videoUrl) {
-            if (strpos($videoUrl, 'youtube.com/watch?v=') !== false) {
-                $videoUrl = str_replace("watch?v=", "embed/", $videoUrl);
-            } elseif (strpos($videoUrl, 'youtu.be/') !== false) {
-                $videoUrl = str_replace("youtu.be/", "www.youtube.com/embed/", $videoUrl);
-            }
-        }
-
-        $about->update([
+        $category->update([
             'title' => $request->title,
             'description' => $request->description,
             'image' => $imagePath,
-            'video_url' => $videoUrl,
+            'updated_by'=>23
         ]);
 
-        return redirect()->route('all.abouts')->with('success', 'About section updated successfully!');
+        return redirect()->route('category.list')->with('success', 'Category updated successfully!');
     }
 
-    public function DeleteAbouts($id)
+    public function Destroy($id)
     {
         // Find the 'About' section by ID
-        $about = About::find($id);
+        $category = Category::find($id);
 
-        if ($about) {
+        if ($category) {
             // Get the image path
-            $img = $about->image;
+            $img = $category->image;
 
             // Check if the image file exists before attempting to delete it
             if ($img && file_exists(public_path($img))) {
@@ -143,24 +120,16 @@ class CategoryController extends Controller
             }
 
             // Delete the database record
-            $about->delete();
+            $category->delete();
 
             // Success notification
-            $notification = array(
-                'message' => 'About Section Deleted Successfully',
-                'alert-type' => 'success'
-            );
+            return redirect()->route('category.list')->with('success' , "Category deleted successfully");
         } else {
             // Error notification if the 'About' section is not found
-            $notification = array(
-                'message' => 'About Section Not Found',
-                'alert-type' => 'error'
-            );
+         return redirect()->route('category.list')->with('error' , "Somthing went error during delete");
         }
 
         // Redirect back with the notification
-        return redirect()->back()->with($notification);
+
     }
-
-
 }

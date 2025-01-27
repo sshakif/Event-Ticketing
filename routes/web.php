@@ -39,6 +39,10 @@ Route::middleware('admin')->group(function(){
 
     //For Category
     Route::get('/category', [CategoryController::class, 'index'])->name('category.list');
+    Route::post('/add_category' , [CategoryController::class, 'Store'])->name('category.add');
+    Route::delete('/delete_category/{id}' , [CategoryController::class, 'Destroy'])->name('category.delete');
+    // end cateogry
+
 
     // role and permission
     Route::post('/store/user', [UserManagementController::class, 'userStore'])->name('store.user');

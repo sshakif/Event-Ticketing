@@ -14,136 +14,229 @@
 
                             <h4 class="mb-sm-0 font-size-18 mt-2">Category List</h4>
                         </div>
-
-
                         <div class="page-title-right">
-                            @canAny(['create-category'])
-                                <a href=""><button class="btn btn-success">Add About
-                                        Section</button></a>
-                            @endcan
-
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddModal">Add Category
+                            </button>
                         </div>
                     </div>
+
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                 </div>
             </div>
             <!-- End page title -->
 
             <div class="row">
                 <div class="col-12">
-
                     <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
                         <thead>
                             <tr>
-                                <th>Title</th>
-                                <th>Note</th>
-                                <th>Image</th>
-
-                                <th>Actions</th>
+                                <th scope="col">Id</th>
+                                <th scope="col"> Name</th>
+                                <th scope="col">Note</th>
+                                <th scope="col">Created by </th>
+                                <th scope="col">Updated by </th>
+                                <th scope="col">Created At </th>
+                                <th scope="col">Updated At </th>
+                                <th scope="col">Actions </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $category)
+
+                            @foreach ($categories as $key => $items)
                                 <tr>
-                                    <td>{{ $category->name }}</td>
-                                    <td>{{ $category->note }}</td>
+                                    <th scope="row"> #{{ $key + 1 }}</th>
+                                    <td class="vam">{{ $items->name }}</td>
 
-                                    <!-- Truncated Description with "See More" -->
+                                    <td class="vam">{{ $items->note }}</td>
 
-
+                                    <td class="vam">{{ $items->created_by }}</td>
+                                    <td class="vam">{{ $items->updated_by }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($items->created_at)->format('m, M, Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($items->updated_at)->format('m, M, Y') }}</td>
                                     <td>
-                                        @if ($category->file_path)
-                                            <img src="{{ asset($category->file_path) }}" alt="About Image" width="100"
-                                                height="auto">
-                                        @else
-                                            <p>No image available</p>
-                                        @endif
+                                        <button data-bs-target="#exampleModaledit{{ $key }}" data-bs-toggle="modal"
+                                            class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button>
+                                        <button data-bs-toggle="modal" data-bs-target="#exampleModaldel{{ $key }}"
+                                            class="btn btn-danger btn-sm "><i class="fa fa-trash"></i></button>
                                     </td>
-
-
-
-                                    <td>
-                                        @canAny(['edit-category'])
-                                            <a href="">
-                                                <button class="btn btn-info btn-sm">Edit</button>
-                                            </a>
-                                        @endcan
-                                        @canAny(['delete-category'])
-                                            <form id="delete-form-{{ $category->id }}" action="" method="POST"
-                                                style="display:inline;">
-                                                @csrf
-                                                <button type="button" class="btn btn-danger btn-sm delete-button"
-                                                    data-id="{{ $category->id }}">
-                                                    Delete
-                                                </button>
-                                            </form>
-                                        @endcan
-                                    </td>
-
                                 </tr>
+                                </tr>
+
+                                <div class="modal fade" id="exampleModaldel{{ $key }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Warning!</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4>Are you sure want delete?</h4>
+
+                                                <div class="d-flex mt-3  gap-1">
+                                                    <button data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
+                                                    <form action="{{ route('category.delete', $items->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         </tbody>
                     </table>
-
-
                 </div> <!-- end col -->
             </div> <!-- end row -->
         </div> <!-- container-fluid -->
     </div>
 
-    <!-- See More Modal -->
-    <div class="modal fade" id="descModal" tabindex="-1" aria-labelledby="descModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    {{-- add dialog --}}
+    <div class="modal fade" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="descModalLabel">Full Description</h5>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="modalDescription"></div>
-            </div>
-        </div>
-    </div>
+                <div class="modal-body">
+                    <div class="ps-widget bgc-white bdrs4 p30  overflow-hidden position-relative">
 
-    <!-- Fix Delete Confirmation -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Handle "See More" click event
-            document.querySelectorAll(".see-more-btn").forEach(function(btn) {
-                btn.addEventListener("click", function() {
-                    let fullDescription = this.getAttribute("data-desc");
-                    document.getElementById("modalDescription").innerHTML = fullDescription;
-                });
-            });
+                        <div class="col-xl">
 
-            // Handle delete confirmation
-            document.querySelectorAll(".delete-button").forEach(function(button) {
-                button.addEventListener("click", function() {
-                    let aboutId = this.getAttribute("data-id");
-                    if (confirm("Are you sure you want to delete this?")) {
-                        document.getElementById("delete-form-" + aboutId).submit();
+                            <form class="form-style1" action="{{ route('category.add') }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+
+                                    <div class="mb20">
+                                        <h5>Title </h5>
+
+                                        <input type="text" class="form-control" name="name" placeholder="">
+                                        @error('name')
+                                            <div class="text-danger">
+                                                {{ $message }}
+                                            </div>
+
+                                            @endif
+                                        </div>
+                                        <div class="mb20 mt-2">
+                                            <h5 class="my-1">Category Image </h5>
+                                            <input type="file" class="form-control" name="image" placeholder="">
+                                            @error('image')
+                                                <div class="text-danger">
+                                                    {{ $message }}
+                                                </div>
+
+                                                @endif
+                                            </div>
+                                            <div class="mb20 mt-2">
+                                                <h5 class="my-1">Write Note</h5>
+                                                <div class="mb-1">
+                                                    <div id="quill-editor" class="mb-3" style="min-height: 170px;">
+                                                    </div>
+                                                    <textarea name="note" rows="3" class="mb-3 d-none" name="body" id="quill-editor-area"></textarea>
+                                                    @error('note')
+                                                        <div class="text-danger">
+                                                            {{ $message }}
+                                                        </div>
+
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="text-start">
+                                                        <button type="submit" class="btn btn-info  mt-2">
+                                                            Add Category
+                                                            <i class="fal fa-arrow-right-long"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {{-- end dailog --}}
+
+
+
+                <!-- Fix Delete Confirmation -->
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        // Handle "See More" click event
+                        document.querySelectorAll(".see-more-btn").forEach(function(btn) {
+                            btn.addEventListener("click", function() {
+                                let fullDescription = this.getAttribute("data-desc");
+                                document.getElementById("modalDescription").innerHTML = fullDescription;
+                            });
+                        });
+
+                        // Handle delete confirmation
+                        document.querySelectorAll(".delete-button").forEach(function(button) {
+                            button.addEventListener("click", function() {
+                                let aboutId = this.getAttribute("data-id");
+                                if (confirm("Are you sure you want to delete this?")) {
+                                    document.getElementById("delete-form-" + aboutId).submit();
+                                }
+                            });
+                        });
+                    });
+                </script>
+
+                <script type="text/javascript">
+                    document.addEventListener('DOMContentLoaded', function() {
+                        if (document.getElementById('quill-editor-area')) {
+                            var editor = new Quill('#quill-editor', {
+                                theme: 'snow'
+                            });
+                            var quillEditor = document.getElementById('quill-editor-area');
+                            editor.on('text-change', function() {
+                                quillEditor.value = editor.root.innerHTML;
+                            });
+
+                            quillEditor.addEventListener('input', function() {
+                                editor.root.innerHTML = quillEditor.value;
+                            });
+                        }
+                    });
+                </script>
+
+
+                <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+                <!-- ✅ Fix Long Description Styling -->
+                <style>
+                    .description-box {
+                        max-width: 250px;
+                        /* Prevents the column from being too wide */
+                        max-height: 60px;
+                        /* Limits height */
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
                     }
-                });
-            });
-        });
-    </script>
 
-    <!-- ✅ Fix Long Description Styling -->
-    <style>
-        .description-box {
-            max-width: 250px;
-            /* Prevents the column from being too wide */
-            max-height: 60px;
-            /* Limits height */
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .description-box .see-more-btn {
-            display: block;
-            color: blue;
-            text-decoration: underline;
-            cursor: pointer;
-            font-size: 12px;
-        }
-    </style>
-@endsection
+                    .description-box .see-more-btn {
+                        display: block;
+                        color: blue;
+                        text-decoration: underline;
+                        cursor: pointer;
+                        font-size: 12px;
+                    }
+                </style>
+            @endsection
