@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder
 
     /**
      * Seed the application's database.
-     * 
+     *
      *
      * @return void
      */
@@ -18,5 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([AdminSeeder::class]);
+        $this->call([PermissionSeeder::class]);
+        $this->call([RoleSeeder::class]);
+        $this->call([UserSeeder::class]);
     }
 }
