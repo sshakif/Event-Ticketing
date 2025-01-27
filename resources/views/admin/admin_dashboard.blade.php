@@ -25,7 +25,7 @@
         rel="stylesheet" type="text/css" />
 
     <!-- preloader css -->
-    <link rel="stylesheet" href="{{ asset('backend-assets/css/preloader.min.css') }}" type="text/css" />
+    {{-- <link rel="stylesheet" href="{{ asset('backend-assets/css/preloader.min.css') }}" type="text/css" /> --}}
 
     <!-- Bootstrap Css -->
     <link href="{{ asset('backend-assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
@@ -46,16 +46,10 @@
 
     <!-- Begin page -->
     <div id="layout-wrapper">
-
-
         @include('admin.body.header')
-
         <!-- ========== Left Sidebar Start ========== -->
         @include('admin.body.sidebar ')
         <!-- Left Sidebar End -->
-
-
-
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->

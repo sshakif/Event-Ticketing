@@ -27,7 +27,7 @@ class AdminController extends Controller
             'email' => $check['email'],
             'password' => $check['password'],
         ];
-        if(Auth::guard('admin')->attempt($data)){
+        if(Auth::guard('web')->attempt($data)){
             return redirect()->route('admin.dashboard')->with('success', 'Login Successfully');
         }
         else{

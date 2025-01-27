@@ -13,12 +13,26 @@
                 </li>
 
                 <!-- Home Section -->
-                <li>
-                    <a href="{{ route('category.list') }}" class="has-arrow">
-                        <i data-feather="layout"></i>
-                        <span data-key="t-apps">Category</span>
-                    </a>
-                </li>
+                @canAny(['category-mangement'])
+                    <li>
+                        <a href="{{ route('category.list') }}">
+                            <i data-feather="layout"></i>
+                            <span data-key="t-apps">Category</span>
+                        </a>
+                    </li>
+                @endcan
+                @canAny(['admin'])
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i data-feather="crosshair"></i>
+                            <span data-key="t-email">User Management</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href="{{ route('assign.role') }}">User List</a></li>
+                            <li><a href="{{ route('role') }}">Roles & Permissions</a></li>
+                        </ul>
+                    </li>
+                @endcan
 
         </div>
     </div>
