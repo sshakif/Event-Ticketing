@@ -57,13 +57,9 @@
         font-size: 22px;
     }
 
-    .sidebar__search {
-        padding: 44px 20px 40px;
-    }
+  
 
-    .sidebar__all-category {
-        padding: 44px 20px 40px;
-    }
+   
 
     .sidebar__post {
         padding: 44px 20px 40px;
@@ -1342,9 +1338,7 @@
         margin-top: 60px;
     }
 
-    .sidebar__search {
-        padding: 44px 20px 40px;
-    }
+ 
 
     .sidebar__all-category {
         padding: 44px 20px 40px;

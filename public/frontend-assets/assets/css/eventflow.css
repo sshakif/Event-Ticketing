@@ -3793,7 +3793,7 @@ ul {
 .site-footer {
   position: relative;
   display: block;
-  padding: 98px 0px 0px;
+  padding: 8px 0px 0px;
   z-index: 1;
 }
 
@@ -4038,7 +4038,7 @@ ul {
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content:center;
   flex-wrap: wrap;
   border-top: 1px solid rgba(var(--eventflow-bdr-color-rgb), .20);
   padding: 40.5px 0;
@@ -7085,37 +7085,46 @@ ul {
 }
 
 .contact-one__text {
-  line-height: 24px;
+
   color: var(--eventflow-white);
-  margin-top: 11px;
-  margin-bottom: 40px;
+
+
 }
 
 .contact-one__form {
   position: relative;
   display: block;
+  margin-top: 8px;
 }
 
 .contact-one__input-box {
   position: relative;
   display: block;
-  margin-bottom: 30px;
+  margin-top: 3px;
 }
 
 .contact-one__input-box input[type="text"],
-.contact-one__input-box input[type="email"] {
-  height: 54px;
+.contact-one__input-box input[type="email"]
+  {
+ 
   width: 100%;
   background-color: transparent;
   border: 1px solid rgba(var(--eventflow-bdr-color-rgb), .20);
-  padding-left: 30px;
-  padding-right: 30px;
+padding: 7px 12px;
+
   outline: none;
   font-size: 16px;
   color: var(--eventflow-white);
   display: block;
   font-weight: 400;
-  border-radius: 27px;
+  border-radius: 12px;
+  margin-top: 6px;
+}
+.contact-one__input-box > input::placeholder{
+  color: #868686;
+}
+.contact-one__input-box > label{
+  padding:1px 5px;
 }
 
 .contact-one__input-box .select-box {
@@ -9829,7 +9838,7 @@ ul {
 .event-page {
   position: relative;
   display: block;
-  padding: 120px 0 90px;
+  padding: 10px 0 90px;
   z-index: 1;
 }
 

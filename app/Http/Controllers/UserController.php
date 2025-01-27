@@ -40,5 +40,9 @@ class UserController extends Controller
     public function Events(){
         return view('frontend.events');
     }
+
+    public function Details(){
+        return view('frontend.details');
+    }
 }
 

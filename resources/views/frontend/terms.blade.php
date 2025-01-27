@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> About || eventflow || eventflow HTML 5 Template </title>
+    <title> Terms || Condition </title>
     <!-- favicons Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicons/favicon-32x32.png" />
@@ -82,57 +82,6 @@
 
 <body class="body-bg-color-1">
 
-
-    <!-- Start sidebar widget content -->
-    <div class="xs-sidebar-group info-group info-sidebar">
-        <div class="xs-overlay xs-bg-black"></div>
-        <div class="xs-sidebar-widget">
-            <div class="sidebar-widget-container">
-                <div class="widget-heading">
-                    <a href="#" class="close-side-widget">X</a>
-                </div>
-                <div class="sidebar-textwidget">
-                    <div class="sidebar-info-contents">
-                        <div class="content-inner">
-                            <div class="logo">
-                                <a href="index.html"><img src="assets/images/resources/logo-1.png"
-                                        alt="" /></a>
-                            </div>
-                            <div class="content-box">
-                                <h4>About Us</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut
-                                    labore et magna aliqua.</p>
-                            </div>
-                            <div class="form-inner">
-                                <h4>Get a free quote</h4>
-                                <form action="https://unicktheme.com/2024/eventflow/main-html/assets/inc/sendemail.php"
-                                    class="contact-form-validated" novalidate="novalidate">
-                                    <div class="form-group">
-                                        <input type="text" name="name" placeholder="Name" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" name="email" placeholder="Email" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea name="message" placeholder="Message..."></textarea>
-                                    </div>
-                                    <div class="form-group message-btn">
-                                        <button type="submit" class="thm-btn form-inner__btn">Submit Now</button>
-                                    </div>
-                                </form>
-                                <div class="result"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End sidebar widget content -->
-
-
-
-
     <div class="page-wrapper">
 
         @include('frontend.layouts.header')
@@ -142,46 +91,10 @@
         </div><!-- /.stricky-header -->
 
 
-        <!--Page Header Start-->
-        <section class="page-header">
-            <div class="page-header__bg"
-                style="background-image: url({{ asset('frontend-assets/assets/images/backgrounds/page-header-bg.jpg') }})">
-            </div>
-            <div class="page-header__shape-1 float-bob-y">
-                <img src="assets/images/shapes/page-header-shape-1.png" alt="">
-            </div>
-            <div class="page-header__shape-2 float-bob-x">
-                <img src="assets/images/shapes/page-header-shape-2.png" alt="">
-            </div>
-            <div class="container">
-                <div class="page-header__inner">
-                    <h2>About Us</h2>
-                    <div class="thm-breadcrumb__box">
-                        <ul class="thm-breadcrumb list-unstyled">
-                            <li><a href="/">Home</a></li>
-                            <li><span class="icon-angle-right"></span></li>
-                            <li>About Us</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--Page Header End-->
+        {{-- terms conditions --}}
+<h1>Terms conditions</h1>
 
-      
-
-    <section class="container" style="margin-top: 23px">
-      <h1 style="font-weight:bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel egestas dolor, nec dignissim metus. Donec augue elit, rhoncus ac sodales id, porttitor vitae est. Donec laoreet rutrum libero sed pharetra.</h1>
-
-      <p style="margin-top: 23px; color:rgb(201, 201, 201)">Lorem Ipsum has evolved as a filler text for prototyping in the English language. As it is written in a Latin looking language that has no meaning, it does not distract from analysing the layout of the page. While Lorem Ipsum is a useful tool for designers, it may not be sufficient when building software applications.
-
-        Most databases, text processing functions and data transfer protocols default to the English alphabet. Testing software applications with only English looking text, like Lorem Ipsum, may not reveal potential mismatches between different parts of the application or ensure that the font can display all necessary characters. Additionally, in today's globalized world, it is likely that your application will be used by people from different countries and languages. Even if you designed your application to be English-only, users with names from other languages may want their names to be displayed properly.
-        
-        
-        
-        Therefore, it is essential to test with different alphabets. At IpsumTxt.com, we offer classic texts in various languages and alphabets to choose from, making it easy to test your software application and ensure that it can handle different languages and character sets correctly.</p>
-    </section>
-
+{{-- end --}}
 
         <!--Site Footer Start-->
         @include('frontend.layouts.footer')

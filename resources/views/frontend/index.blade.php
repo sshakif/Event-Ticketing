@@ -83,14 +83,6 @@
 
 <body class="body-bg-color-1">
 
-
-    <!--
-    <div class="preloader">
-        <div class="preloader__image"></div>
-    </div> -->
-
-
-
     <!-- Start sidebar widget content -->
     <div class="xs-sidebar-group info-group info-sidebar">
         <div class="xs-overlay xs-bg-black"></div>
@@ -141,49 +133,8 @@
 
 
     <div class="page-wrapper">
-        <header class="main-header">
-            <nav class="main-menu">
-                <div class="main-menu__wrapper">
-                    <div class="main-menu__wrapper-inner">
-                        <div class="main-menu__left">
-                            <div class="main-menu__logo">
-                                <a href="/">
-                                    <!-- website logo -->
-
-                                    <img src="{{ asset('frontend-assets/assets/images/resources/logo-1.png') }}"
-                                        alt=""></a>
-                            </div>
-                        </div>
-                        <div class="main-menu__main-menu-box">
-                            <a href="#" class="mobile-nav__toggler"><i class="fa fa-bars"></i></a>
-                            <ul class="main-menu__list">
-                                <li class="text-primary">
-                                    <a href="/">Home </a>
-
-                                </li>
-                                <li>
-                                    <a href="/events">Events</a>
-
-                                </li>
-                                <li>
-                                    <a href="/about">About Us</a>
-
-                                </li>
-
-                            </ul>
-                        </div>
-                        <div class="main-menu__right">
-
-                            <div class="main-menu__btn-box">
-                                <a href="contact.html" class="main-menu__btn thm-btn">Buy Ticket <span
-                                        class="icon-arrow-right"></span> </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
-
+ 
+@include('frontend.layouts.header')
         <div class="stricky-header stricked-menu main-menu">
             <div class="sticky-header__content"></div>
         </div>
@@ -270,7 +221,7 @@
                                             </li>
                                         </ul>
                                         <div class="main-slider__btn-box">
-                                            <a href="contact.html" class="main-slider__btn thm-btn">Purchase Ticket
+                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase Ticket
                                                 <span class="icon-arrow-right"></span> </a>
                                         </div>
                                     </div>
@@ -341,7 +292,7 @@
                                             </li>
                                         </ul>
                                         <div class="main-slider__btn-box">
-                                            <a href="contact.html" class="main-slider__btn thm-btn">Purchase Ticket
+                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase Ticket
                                                 <span class="icon-arrow-right"></span> </a>
                                         </div>
                                     </div>
@@ -410,7 +361,7 @@
                                             </li>
                                         </ul>
                                         <div class="main-slider__btn-box">
-                                            <a href="contact.html" class="main-slider__btn thm-btn">Purchase Ticket
+                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase Ticket
                                                 <span class="icon-arrow-right"></span> </a>
                                         </div>
                                     </div>
@@ -443,7 +394,7 @@
                         <h2 class="section-title__title">Upcoming Events</h2>
                     </div>
                     <div class="blog-one__btn-box">
-                        <a href="blog.html" class="blog-one__btn thm-btn">View All Events<span
+                        <a href="/events" class="blog-one__btn thm-btn">View All Events<span
                                 class="icon-arrow-right"></span>
                         </a>
                     </div>
@@ -458,7 +409,7 @@
                                     <img src="{{ asset('frontend-assets/assets/images/blog/blog-1-1.jpg') }}"
                                         alt="">
                                     <div class="blog-one__hover">
-                                        <a href="blog-details.html">
+                                        <a href="/event/details/12">
                                             <div class="blog-one__hover-icon-1">
                                                 <span class="blog-one__hover-icon-2"></span>
                                             </div>
@@ -474,11 +425,11 @@
                                             <a href="#"><span class="icon-calendar"></span>October 19, 2022</a>
                                         </li>
                                     </ul>
-                                    <h3 class="blog-one__title"><a href="blog-details.html">Join the Festivi Celebrate
+                                    <h3 class="blog-one__title"><a href="/event/details/12">Join the Festivi Celebrate
                                             <br> Special Moments</a></h3>
                                     <div class="blog-one__btn-box-two">
-                                        <a href="blog-details.html" class="blog-one__btn-2 thm-btn">Read More<span
-                                                class="icon-arrow-right"></span>
+                                        <a href="/event/details/12" class="blog-one__btn-2 thm-btn">Read More<span
+                                                class="fa fa-arrow-right"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -493,7 +444,7 @@
                                     <img src="{{ asset('frontend-assets/assets/images/blog/blog-1-2.jpg') }}"
                                         alt="">
                                     <div class="blog-one__hover">
-                                        <a href="blog-details.html">
+                                        <a href="/event/details/12">
                                             <div class="blog-one__hover-icon-1">
                                                 <span class="blog-one__hover-icon-2"></span>
                                             </div>
@@ -509,11 +460,11 @@
                                             <a href="#"><span class="icon-calendar"></span>October 19, 2022</a>
                                         </li>
                                     </ul>
-                                    <h3 class="blog-one__title"><a href="blog-details.html">Embrace the Joyful Spirit
+                                    <h3 class="blog-one__title"><a href="/event/details/12">Embrace the Joyful Spirit
                                             Discover a World</a></h3>
                                     <div class="blog-one__btn-box-two">
-                                        <a href="blog-details.html" class="blog-one__btn-2 thm-btn">Read More<span
-                                                class="icon-arrow-right"></span>
+                                        <a href="/event/details/12" class="blog-one__btn-2 thm-btn">Read More<span
+                                            class="fa fa-arrow-right"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -528,7 +479,7 @@
                                     <img src="{{ asset('frontend-assets/assets/images/blog/blog-1-3.jpg') }}"
                                         alt="">
                                     <div class="blog-one__hover">
-                                        <a href="blog-details.html">
+                                        <a href="/event/details/12">
                                             <div class="blog-one__hover-icon-1">
                                                 <span class="blog-one__hover-icon-2"></span>
                                             </div>
@@ -544,12 +495,12 @@
                                             <a href="#"><span class="icon-calendar"></span>October 19, 2022</a>
                                         </li>
                                     </ul>
-                                    <h3 class="blog-one__title"><a href="blog-details.html">Where Moments Come Alive
+                                    <h3 class="blog-one__title"><a href="/event/details/12">Where Moments Come Alive
                                             an
                                             Celebrate</a></h3>
                                     <div class="blog-one__btn-box-two">
-                                        <a href="blog-details.html" class="blog-one__btn-2 thm-btn">Read More<span
-                                                class="icon-arrow-right"></span>
+                                        <a href="/event/details/12" class="blog-one__btn-2 thm-btn">Read More<span
+                                            class="fa fa-arrow-right"></span>
                                         </a>
                                     </div>
                                 </div>

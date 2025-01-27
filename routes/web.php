@@ -2,14 +2,18 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\CategoryController;
-
+use App\Http\Controllers\EventsController;
 
 //Frontend Route List
-Route::get('/', [UserController::class, 'Index'])->name('index');
-Route::get('/about', [UserController::class, 'About'])->name('about');
-Route::get('/events', [UserController::class, 'Events'])->name('events');
+Route::get('/', [EventsController::class, 'Index'])->name('index');
+Route::get('/about', [EventsController::class, 'About'])->name('about');
+Route::get('/events', [EventsController::class, 'Events'])->name('events');
+Route::get('/event/details/{id}' , [EventsController::class, 'Details'])->name('details');
+Route::get('/terms-conditions' , [EventsController::class, 'Terms'])->name('terms');
+Route::get('/privacy-policy' , [EventsController::class, 'Privacy'])->name('privacy');
+Route::get('/event/details/{id}' , [EventsController::class, 'Details'])->name('details');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

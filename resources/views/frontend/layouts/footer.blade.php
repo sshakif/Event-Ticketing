@@ -22,55 +22,6 @@
                 <div class="container">
                     <div class="site-footer__middle-inner">
                         <div class="row">
-                            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="100ms">
-                                <div class="footer-widget__column footer-widget__events">
-                                    <div class="footer-widget__title-box">
-                                        <h3 class="footer-widget__title">Upcoming Events</h3>
-                                    </div>
-                                    <ul class="footer-widget__events-list list-unstyled">
-                                        <li>
-                                            <p>11 April 2024 At 10 Pm In Dhaka</p>
-                                            <h5>Ui/ux Designer Meetup</h5>
-                                            <a href="event-details.html">Get a Ticket <span
-                                                    class="icon-arrow-right"></span></a>
-                                        </li>
-                                        <li>
-                                            <p>11 April 2024 At 10 Pm In Dhaka</p>
-                                            <h5>Ui/ux Designer Meetup</h5>
-                                            <a href="event-details.html">Get a Ticket <span
-                                                    class="icon-arrow-right"></span></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                                <div class="footer-widget__column footer-widget__link">
-                                    <div class="footer-widget__title-box">
-                                        <h3 class="footer-widget__title">Quick links</h3>
-                                    </div>
-                                    <ul class="footer-widget__link-list list-unstyled">
-                                        <li><a href="about.html">About Us</a></li>
-                                        <li><a href="services.html">Service</a></li>
-                                        <li><a href="contact.html">Online Ticket</a></li>
-                                        <li><a href="blog.html">Blog Post</a></li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
-                                <div class="footer-widget__column footer-widget__our-company">
-                                    <div class="footer-widget__title-box">
-                                        <h3 class="footer-widget__title">Our Company</h3>
-                                    </div>
-                                    <ul class="footer-widget__link-list list-unstyled">
-                                        <li><a href="schedule-list-2.html">Jubilee Events</a></li>
-                                        <li><a href="about.html">Gala Affairs</a></li>
-                                        <li><a href="about.html">Inspire and Delight Events</a></li>
-                                        <li><a href="about.html">Enchanted Gatherings</a></li>
-                                        <li><a href="about.html">Eventful Ventures</a></li>
-                                    </ul>
-                                </div>
-                            </div>
                             <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="400ms">
                                 <div class="footer-widget__column footer-widget__contact">
                                     <div class="footer-widget__title-box">
@@ -80,7 +31,7 @@
                                         <ul class="footer-widget__contact-list list-unstyled">
                                             <li>
                                                 <div class="icon">
-                                                    <span class="icon-envelop"></span>
+                                                    <span class="icon-envelop"><i class="fa-regular fa-envelope"></i></span>
                                                 </div>
                                                 <div class="text">
                                                     <p><a href="mailto:nafiz125@gmail.com">nafiz125@gmail.com</a>
@@ -89,7 +40,7 @@
                                             </li>
                                             <li>
                                                 <div class="icon">
-                                                    <span class="icon-pin"></span>
+                                                    <span class="icon-pin"><i class="fa-solid fa-location-dot"></i></span>
                                                 </div>
                                                 <div class="text">
                                                     <p>3891 Ranchview Dr. Richardson</p>
@@ -97,7 +48,7 @@
                                             </li>
                                             <li>
                                                 <div class="icon">
-                                                    <span class="icon-call"></span>
+                                                    <span class="icon-call"><i class="fa-solid fa-phone"></i></span>
                                                 </div>
                                                 <div class="text">
                                                     <p><a href="tel:01245789321">01245789321, 012457895146</a></p>
@@ -107,6 +58,34 @@
                                     </div>
                                 </div>
                             </div>
+            
+                            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
+                                <div class="footer-widget__column footer-widget__link">
+                                    <div class="footer-widget__title-box">
+                                        <h3 class="footer-widget__title">Quick links</h3>
+                                    </div>
+                                    <ul class="footer-widget__link-list list-unstyled">
+                                        <li><a href="about.html">Facebook</a></li>
+                                        <li><a href="about.html">Twitter</a></li>
+                                        <li><a href="about.html">Google</a></li>
+                                        
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="300ms">
+                                <div class="footer-widget__column footer-widget__our-company">
+                                    <div class="footer-widget__title-box">
+                                        <h3 class="footer-widget__title">Pages</h3>
+                                    </div>
+                                    <ul class="footer-widget__link-list list-unstyled">
+                                        <li><a href="/terms-conditions">Terms and condition</a></li>
+                                        <li><a href="/privacy-policy">Privacy and policy</a></li>
+                                        <li><a href="/events">Tickets</a></li>
+                                    
+                                    </ul>
+                                </div>
+                            </div>
+                       
                         </div>
                     </div>
                 </div>
@@ -115,11 +94,7 @@
                 <div class="container">
                     <div class="site-footer__bottom-inner">
                         <p class="site-footer__bottom-text">© EventFlow 2024 | All Rights Reserved</p>
-                        <ul class="list-unstyled site-footer__bottom-menu">
-                            <li><a href="about.html">Trams & Condition</a></li>
-                            <li><a href="about.html">Privacy Policy</a></li>
-                            <li><a href="about.html">Contact Us</a></li>
-                        </ul>
+                      
                     </div>
                 </div>
             </div>
