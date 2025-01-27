@@ -44,5 +44,13 @@ class UserController extends Controller
     public function Details(){
         return view('frontend.details');
     }
+
+    public function Terms(){
+        return view('frontend.terms');
+    }
+
+    public function Privacy(){
+        return view('frontend.privacy');
+    }
 }
 

@@ -3,16 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\EventsController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\UserManagementController;
+use Spatie\Permission\Middlewares\PermissionMiddleware;
 
 //Frontend Route List
-Route::get('/', [EventsController::class, 'Index'])->name('index');
-Route::get('/about', [EventsController::class, 'About'])->name('about');
-Route::get('/events', [EventsController::class, 'Events'])->name('events');
-Route::get('/event/details/{id}' , [EventsController::class, 'Details'])->name('details');
-Route::get('/terms-conditions' , [EventsController::class, 'Terms'])->name('terms');
-Route::get('/privacy-policy' , [EventsController::class, 'Privacy'])->name('privacy');
-Route::get('/event/details/{id}' , [EventsController::class, 'Details'])->name('details');
+Route::get('/', [UserController::class, 'Index'])->name('index');
+Route::get('/about', [UserController::class, 'About'])->name('about');
+Route::get('/events', [UserController::class, 'Events'])->name('events');
+Route::get('/event/details/{id}' , [UserController::class, 'Details'])->name('details');
+Route::get('/terms-conditions' , [UserController::class, 'Terms'])->name('terms');
+Route::get('/privacy-policy' , [UserController::class, 'Privacy'])->name('privacy');
+Route::get('/event/details/{id}' , [UserController::class, 'Details'])->name('details');
 
 
 Route::get('/dashboard', function () {
@@ -37,6 +39,15 @@ Route::middleware('admin')->group(function(){
 
     //For Category
     Route::get('/category', [CategoryController::class, 'index'])->name('category.list');
+
+    // role and permission
+    Route::post('/store/user', [UserManagementController::class, 'userStore'])->name('store.user');
+    Route::get('/role', [UserManagementController::class, 'role'])->name('role');
+    Route::get('/assign/role', [UserManagementController::class, 'assign_role'])->name('assign.role');
+    Route::post('/save/role', [UserManagementController::class, 'store_role'])->name('store.role');
+    Route::put('/roles/{id}', [UserManagementController::class, 'updateRole'])->name('roles.update');
+    Route::delete('/roles/{id}', [UserManagementController::class, 'deleteRole'])->name('roles.delete');
+    Route::post('/users/{id}/assign-role', [UserManagementController::class, 'assignRole'])->name('users.assign-role');
 
 });
 
