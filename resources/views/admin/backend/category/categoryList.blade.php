@@ -38,35 +38,51 @@
                                 <th scope="col">Id</th>
                                 <th scope="col"> Name</th>
                                 <th scope="col">Note</th>
-                                <th scope="col">Created by </th>
-                                <th scope="col">Updated by </th>
+                                <th scope="col">Imges</th>
                                 <th scope="col">Created At </th>
-                                <th scope="col">Updated At </th>
                                 <th scope="col">Actions </th>
                             </tr>
                         </thead>
                         <tbody>
-
                             @foreach ($categories as $key => $items)
                                 <tr>
                                     <th scope="row"> #{{ $key + 1 }}</th>
                                     <td class="vam">{{ $items->name }}</td>
 
-                                    <td class="vam">{{ $items->note }}</td>
+                                    <td class="vam" style="width:200px;">
+                                        @php
+                                            $note = strip_tags($items->note); // Remove HTML tags from the text
+                                        @endphp
 
-                                    <td class="vam">{{ $items->created_by }}</td>
-                                    <td class="vam">{{ $items->updated_by }}</td>
+                                        {!! \Illuminate\Support\Str::limit($note, 50, '...') !!}
+
+                                        @if (strlen($note) > 50)
+                                            <a data-bs-toggle="modal" data-bs-target="#ViewNote{{ $key }}"
+                                                style="color: rgb(56, 56, 255); cursor: pointer;">See more</a>
+                                        @endif
+
+                                    </td>
+                                    <td class="vam">
+                                        <div data-bs-toggle="modal" data-bs-target="#ViewImg{{ $key }}"
+                                            style="width: 120px; height:80px; border-radius:8px; cursor: pointer;">
+                                            <img style="width: 100%;  background-size:cover;" src="{{ $items->file_path }}"
+                                                alt="Example Image">
+                                        </div>
+                                    </td>
+
                                     <td>{{ \Carbon\Carbon::parse($items->created_at)->format('m, M, Y') }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($items->updated_at)->format('m, M, Y') }}</td>
-                                    <td>
-                                        <button data-bs-target="#exampleModaledit{{ $key }}" data-bs-toggle="modal"
-                                            class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button>
+                                    <td style="display:flex; align-items:center; gap:8px;">
+
+                                        <form action="{{route('category.edit', $items->id)}}" method="GET"> <button
+                                            class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button></form>
+                                            
+                                        
                                         <button data-bs-toggle="modal" data-bs-target="#exampleModaldel{{ $key }}"
                                             class="btn btn-danger btn-sm "><i class="fa fa-trash"></i></button>
                                     </td>
                                 </tr>
                                 </tr>
-
+                                {{-- delete alert model --}}
                                 <div class="modal fade" id="exampleModaldel{{ $key }}" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -94,6 +110,45 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- end delete alert model --}}
+                                {{-- view img model --}}
+                                <div class="modal fade" id="ViewImg{{ $key }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">View Image</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div style="width:100%; height:auto; border-radius:12px;">
+                                                    <img style="width: 100%; border-radius:12px;  background-size:cover;"
+                                                        src="{{ $items->file_path }}" alt="Example Image">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- end view img model --}}
+                                {{-- view note modal --}}
+                                <div class="modal fade" id="ViewNote{{ $key }}" tabindex="-1"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Note Details</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                {!! $items->note !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- end --}}
                             @endforeach
                         </tbody>
                     </table>
@@ -102,15 +157,15 @@
         </div> <!-- container-fluid -->
     </div>
 
-    {{-- add dialog --}}
+    {{-- add category dialog --}}
     <div class="modal fade" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+                 </div>
+                 <div class="modal-body">
                     <div class="ps-widget bgc-white bdrs4 p30  overflow-hidden position-relative">
 
                         <div class="col-xl">
@@ -119,9 +174,8 @@
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
-
                                     <div class="mb20">
-                                        <h5>Title </h5>
+                                        <h5> Category Name </h5>
 
                                         <input type="text" class="form-control" name="name" placeholder="">
                                         @error('name')
@@ -171,11 +225,11 @@
 
                         </div>
                     </div>
-                </div>
+     </div>
+
+
+
                 {{-- end dailog --}}
-
-
-
                 <!-- Fix Delete Confirmation -->
                 <script>
                     document.addEventListener("DOMContentLoaded", function() {

@@ -41,6 +41,8 @@ Route::middleware('admin')->group(function(){
     Route::get('/category', [CategoryController::class, 'index'])->name('category.list');
     Route::post('/add_category' , [CategoryController::class, 'Store'])->name('category.add');
     Route::delete('/delete_category/{id}' , [CategoryController::class, 'Destroy'])->name('category.delete');
+    Route::get('/category/edit/{id}' , [CategoryController::class, 'Edit'])->name('category.edit');
+    Route::put('/category/update/{id}' , [CategoryController::class, 'Update'])->name('category.update');
     // end cateogry
 
 
