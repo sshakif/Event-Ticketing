@@ -20,8 +20,6 @@ class CategoryController extends Controller
         return view('admin.backend.category.categoryList', compact('categories'));
     }
 
-
-    // Store a new About section
     public function Store(Request $request)
     {
 
@@ -46,8 +44,8 @@ class CategoryController extends Controller
         Category::create([
             'name' => $request->name,
             'note' => $request->note,
-            'file_path' => $imagePath,
-            'mime_type' => $mime_type,
+            'file_path' => $imagePath ? $imagePath :null,
+            'mime_type' => $imagePath ? $mime_type : null,
             'created_by' => Auth::user()->id
         ]);
         return redirect()->route('category.list')->with('success', 'Category added successfully!');
@@ -60,7 +58,6 @@ class CategoryController extends Controller
 
     public function Update(Request $request, $id)
     {
-        
         $category = Category::findOrFail($id);
         
         $request->validate([
@@ -70,6 +67,7 @@ class CategoryController extends Controller
             
         ]);
 
+        $imagePath = null;
         if ($request->hasFile('image')) {
             if ($category->file_path && file_exists(public_path($category->file_path))) {
                 unlink(public_path($category->file_path));
@@ -82,13 +80,12 @@ class CategoryController extends Controller
                     mkdir(public_path('upload/category'), 0777, true);
             }
             $image->move(public_path('upload/category'), $imageName);
-            $imagePath = 'upload/category/' . $imageName;     
+            $imagePath = 'upload/category/' . $imageName;      
         }
-
 
         $category->name = $request->name;
         $category->note = $request->note;
-        $category->file_path = $imagePath;
+        $category->file_path = $imagePath ? $imagePath : $category->file_path;
         $category->updated_by = Auth::user()->id;
 
         $category->save();

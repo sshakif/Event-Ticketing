@@ -47,7 +47,20 @@
                             @foreach ($categories as $key => $items)
                                 <tr>
                                     <th scope="row"> #{{ $key + 1 }}</th>
-                                    <td class="vam">{{ $items->name }}</td>
+
+                                    <td class="vam" style="width:200px;">
+                                        @php
+                                            $note = strip_tags($items->name); // Remove HTML tags from the text
+                                        @endphp
+
+                                        {!! \Illuminate\Support\Str::limit($note, 15, '...') !!}
+
+                                        @if (strlen($note) > 50)
+                                            <a data-bs-toggle="modal" data-bs-target="#ViewNote{{ $key }}"
+                                                style="color: rgb(56, 56, 255); cursor: pointer;">See more</a>
+                                        @endif
+
+                                    </td>
 
                                     <td class="vam" style="width:200px;">
                                         @php
@@ -63,20 +76,20 @@
 
                                     </td>
                                     <td class="vam">
-                                        <div data-bs-toggle="modal" data-bs-target="#ViewImg{{ $key }}"
+                                        <div data-bs-toggle="modal"
+                                            @if ($items->file_path) data-bs-target="#ViewImg{{ $key }}" @endif
                                             style="width: 120px; height:80px; border-radius:8px; cursor: pointer;">
-                                            <img style="width: 100%;  background-size:cover;" src="{{ $items->file_path }}"
-                                                alt="Example Image">
+                                            <img style="width: 100%;  background-size:cover;" src="{{ $items->file_path }}">
                                         </div>
                                     </td>
 
                                     <td>{{ \Carbon\Carbon::parse($items->created_at)->format('m, M, Y') }}</td>
                                     <td style="display:flex; align-items:center; gap:8px;">
 
-                                        <form action="{{route('category.edit', $items->id)}}" method="GET"> <button
-                                            class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button></form>
-                                            
-                                        
+                                        <form action="{{ route('category.edit', $items->id) }}" method="GET"> <button
+                                                class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button></form>
+
+
                                         <button data-bs-toggle="modal" data-bs-target="#exampleModaldel{{ $key }}"
                                             class="btn btn-danger btn-sm "><i class="fa fa-trash"></i></button>
                                     </td>
@@ -164,8 +177,8 @@
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                 </div>
-                 <div class="modal-body">
+                </div>
+                <div class="modal-body">
                     <div class="ps-widget bgc-white bdrs4 p30  overflow-hidden position-relative">
 
                         <div class="col-xl">
@@ -225,7 +238,7 @@
 
                         </div>
                     </div>
-     </div>
+                </div>
 
 
 
