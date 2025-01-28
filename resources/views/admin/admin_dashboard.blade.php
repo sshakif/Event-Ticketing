@@ -40,7 +40,14 @@
 
 
 </head>
+<style>
+    .sidebar-enable .footer{
+         position: relative !important;
+         bottom: 0 !important;
+         z-index: 4;
+    }
 
+</style>
 <body>
 
     <!-- <body data-layout="horizontal"> -->

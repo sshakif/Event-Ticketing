@@ -133,8 +133,8 @@
 
 
     <div class="page-wrapper">
- 
-@include('frontend.layouts.header')
+
+        @include('frontend.layouts.header')
         <div class="stricky-header stricked-menu main-menu">
             <div class="sticky-header__content"></div>
         </div>
@@ -221,7 +221,8 @@
                                             </li>
                                         </ul>
                                         <div class="main-slider__btn-box">
-                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase Ticket
+                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase
+                                                Ticket
                                                 <span class="icon-arrow-right"></span> </a>
                                         </div>
                                     </div>
@@ -292,7 +293,8 @@
                                             </li>
                                         </ul>
                                         <div class="main-slider__btn-box">
-                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase Ticket
+                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase
+                                                Ticket
                                                 <span class="icon-arrow-right"></span> </a>
                                         </div>
                                     </div>
@@ -303,27 +305,27 @@
 
                     <div class="swiper-slide">
                         <div class="main-slider__img">
-                        
+
                             <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-img-1-3.jpg') }}"
                                 alt="">
                         </div>
                         <div class="main-slider__shpae-1">
-                            
+
                             <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-shape-1.png') }}"
                                 alt="">
                         </div>
                         <div class="main-slider__shpae-2">
-                         
+
                             <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-shape-2.png') }}"
                                 alt="">
                         </div>
                         <div class="main-slider__start-1">
-                         
+
                             <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-star-1.png') }}"
                                 alt="">
                         </div>
                         <div class="main-slider__start-2 zoominout">
-                            
+
                             <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-star-2.png') }}"
                                 alt="">
                         </div>
@@ -361,7 +363,8 @@
                                             </li>
                                         </ul>
                                         <div class="main-slider__btn-box">
-                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase Ticket
+                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase
+                                                Ticket
                                                 <span class="icon-arrow-right"></span> </a>
                                         </div>
                                     </div>
@@ -464,7 +467,7 @@
                                             Discover a World</a></h3>
                                     <div class="blog-one__btn-box-two">
                                         <a href="/event/details/12" class="blog-one__btn-2 thm-btn">Read More<span
-                                            class="fa fa-arrow-right"></span>
+                                                class="fa fa-arrow-right"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -500,7 +503,7 @@
                                             Celebrate</a></h3>
                                     <div class="blog-one__btn-box-two">
                                         <a href="/event/details/12" class="blog-one__btn-2 thm-btn">Read More<span
-                                            class="fa fa-arrow-right"></span>
+                                                class="fa fa-arrow-right"></span>
                                         </a>
                                     </div>
                                 </div>
@@ -516,119 +519,25 @@
             <div class="sliding-text-one__wrap w-full ">
                 <h1 class="w-full py-5 fw-bold text-2xl text-center">Catagory</h1>
                 <ul class="sliding-text__list  marquee_mode">
-                    <li>
-
-                        <div class="catagory-card">
-                            <div class="catagory-img">
-                                <img src="{{ asset('frontend-assets/assets/images/resources/main-slider-img-1-2.jpg') }}"
-                                    alt="">
+                    @foreach ($categories as $key => $items)
+                       <a class="events-cat" href="/events" style="">
+                        <li style="cursor: pointer;">
+                            <div class="catagory-card">
+                                <div class="catagory-img">
+                                    <img src="{{ asset($items->file_path) }}" alt="">
+                                </div>
+                                <b>{{ $items->name }}</b>
                             </div>
-
-                            <b>Alan waker</b>
-                        </div>
-                    </li>
-
-
-
-                    <li>
-
-                        <div class="catagory-card">
-                            <div class="catagory-img">
-                                <img src="{{ asset('frontend-assets/assets/images/resources/main-slider-img-1-2.jpg') }}"
-                                    alt="">
-                            </div>
-
-                            <b>Alan waker</b>
-                        </div>
-                    </li>
-
-
-                    <li>
-
-                        <div class="catagory-card">
-                            <div class="catagory-img">
-                                <img src="{{ asset('frontend-assets/assets/images/resources/main-slider-img-1-2.jpg') }}"
-                                    alt="">
-                            </div>
-
-                            <b>Alan waker</b>
-                        </div>
-                    </li>
-
-
-                    <li>
-
-                        <div class="catagory-card">
-                            <div class="catagory-img">
-                                <img src="{{ asset('frontend-assets/assets/images/resources/main-slider-img-1-2.jpg') }}"
-                                    alt="">
-                            </div>
-
-                            <b>Alan waker</b>
-                        </div>
-                    </li>
-
-
-                    <li>
-
-                        <div class="catagory-card">
-                            <div class="catagory-img">
-                                <img src="{{ asset('frontend-assets/assets/images/blog/blog-1-1.jpg') }}"
-                                    alt="">
-                            </div>
-
-                            <b>Alan waker</b>
-                        </div>
-                    </li>
-
-
-                    <li>
-
-                        <div class="catagory-card">
-                            <div class="catagory-img">
-                                <img src="{{ asset('frontend-assets/assets/images/blog/blog-1-1.jpg') }}"
-                                    alt="">
-                            </div>
-
-                            <b>Alan waker</b>
-                        </div>
-                    </li>
-
-
-
-                    <li>
-
-                        <div class="catagory-card">
-                            <div class="catagory-img">
-                                <img src="{{ asset('frontend-assets/assets/images/blog/blog-1-1.jpg') }}"
-                                    alt="">
-                            </div>
-
-                            <b>Alan waker</b>
-                        </div>
-                    </li>
-
-
-
-                    <li>
-
-                        <div class="catagory-card">
-                            <div class="catagory-img">
-                                <img src="{{ asset('frontend-assets/assets/images/blog/blog-1-1.jpg') }}"
-                                    alt="">
-                            </div>
-
-                            <b>Alan waker</b>
-                        </div>
-                    </li>
-
+                        </li>
+                       </a>
+                    @endforeach
                 </ul>
             </div>
         </section>
 
 
         <!--Site Footer Start-->
-         @include('frontend.layouts.footer')
+        @include('frontend.layouts.footer')
         <!--Site Footer End-->
 
 

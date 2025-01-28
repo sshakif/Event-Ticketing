@@ -16,8 +16,7 @@ use App\Models\Project;
 use App\Models\Testimonial;
 use App\Models\Service;
 use App\Models\About;
-
-
+use App\Models\Category;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -29,8 +28,9 @@ class UserController extends Controller
 
     public function index()
     {
+        $categories = Category::orderBy('created_at', 'desc')->get();
         
-        return view('frontend.index');
+        return view('frontend.index' , compact('categories'));
     }
 
     public function About(){

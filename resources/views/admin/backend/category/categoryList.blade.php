@@ -8,7 +8,7 @@
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <div>
                             <ol class="breadcrumb m-0">
-                                <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
                                 <li class="breadcrumb-item active">Category List</li>
                             </ol>
 
@@ -78,8 +78,8 @@
                                     <td class="vam">
                                         <div data-bs-toggle="modal"
                                             @if ($items->file_path) data-bs-target="#ViewImg{{ $key }}" @endif
-                                            style="width: 120px; height:80px; border-radius:8px; cursor: pointer;">
-                                            <img style="width: 100%;  background-size:cover;" src="{{ $items->file_path }}">
+                                            style="width: 120px; height:80px; overflow:hidden; border-radius:8px; cursor: pointer;">
+                                            <img style="width: 100%; height:100%;   background-size:cover;" src="{{ $items->file_path }}">
                                         </div>
                                     </td>
 

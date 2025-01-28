@@ -11,7 +11,22 @@ display: flex;
     border-radius:50%;
     overflow: hidden;
     border: 5px solid rgb(58, 5, 75);
-}.catagory-img img{
+}.catagory-card .catagory-img:hover{
+
+    border: 5px solid rgb(120, 15, 156);
+    transition: all 0.3s ease-in-out;
+}
+.catagory-card:hover .catagory-img img{
+    scale: calc(1.2);
+    transition: all 0.5s ease-in-out;
+}
+
+.catagory-card b{
+    color: white;
+}
+
+
+.catagory-img img{
     height: 100%;
     width: 100%;
 }
@@ -213,3 +228,4 @@ cursor: pointer;
         display: none;
     }
 }
+

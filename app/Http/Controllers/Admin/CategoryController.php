@@ -44,7 +44,7 @@ class CategoryController extends Controller
         Category::create([
             'name' => $request->name,
             'note' => $request->note,
-            'file_path' => $imagePath ? $imagePath :null,
+            'file_path' => $imagePath ? $imagePath : null,
             'mime_type' => $imagePath ? $mime_type : null,
             'created_by' => Auth::user()->id
         ]);
@@ -59,12 +59,12 @@ class CategoryController extends Controller
     public function Update(Request $request, $id)
     {
         $category = Category::findOrFail($id);
-        
+
         $request->validate([
             'name' => 'required|string|max:255',
             'note' => 'required|string',
             'image' => 'nullable|image|mimes:jpg,png,jpeg,svg|max:2048',
-            
+
         ]);
 
         $imagePath = null;
@@ -77,10 +77,10 @@ class CategoryController extends Controller
             $mime_type = $image->getClientMimeType();
             $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
             if (!file_exists(public_path('upload/category'))) {
-                    mkdir(public_path('upload/category'), 0777, true);
+                mkdir(public_path('upload/category'), 0777, true);
             }
             $image->move(public_path('upload/category'), $imageName);
-            $imagePath = 'upload/category/' . $imageName;      
+            $imagePath = 'upload/category/' . $imageName;
         }
 
         $category->name = $request->name;
@@ -99,7 +99,7 @@ class CategoryController extends Controller
 
         if ($category) {
             $img = $category->file_path;
- 
+
             if ($img && file_exists(public_path($img))) {
                 unlink(public_path($img));
             }

@@ -2,6 +2,30 @@
 @section('admin')
     <div class="page-content">
         <div class="container-fluid">
+            <div class="row">
+                <div class="">
+                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                        <div>
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
+                                <li class="breadcrumb-item active">Edit Category</li>
+                            </ol>
+
+                            <h4 class="mb-sm-0 font-size-18 mt-2">Edit Category</h4>
+                        </div>
+                        <div class="page-title-right">
+                            
+                        </div>
+                    </div>
+
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                </div>
+            </div>
 
         </div>
     </div>
@@ -39,9 +63,9 @@
                                             <div class="d-flex gap-5 align-items-center">
                                                 <input type="file" style="width:100%" class="file-up form-control" name="image"
                                                     placeholder="">
-                                                <div style="width: 200px; height:200px; overflow:hidden;display:none; "  class="img-bar">
+                                                <div style="width: 200px; height:200px; overflow:hidden; "  class="img-bar">
                                                     <img style="background-size: cover; height: 80%; width:100%; border-radius:12px;" class="preview-img w-full h-full "
-                                                        alt="">
+                                                    src="{{ asset($category->file_path) }}"    alt="">
                                                 </div>
 
                                             </div>
@@ -91,8 +115,11 @@
         <script>
             let file = document.querySelector('.file-up');
             let img_preview= document.querySelector('.preview-img');
+            
             file.addEventListener('change', (e) => {
+                document.querySelector('.footer').style.position ='relative';
                 file.style.width='50%';
+                document.querySelector('.footer').style.position ='relative';
                 document.querySelector('.img-bar').style.display= 'block';
                 let reader = new FileReader();
                 reader.readAsDataURL(e.target.files[0]);
