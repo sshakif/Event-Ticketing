@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -21,6 +22,12 @@ class AdminController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if($user->status == 0){
+            return redirect()->route('admin.login')->with('error','You are not authenticate user');
+        }
 
         $check = $request->all();
         $data = [

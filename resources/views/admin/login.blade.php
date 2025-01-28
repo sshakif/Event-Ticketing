@@ -65,6 +65,16 @@
     <div class="login-container">
         <h2>Admin Login</h2>
 
+        @if (session('error'))
+            <div id="error-message"
+                style="color: red; background-color: #f8d7da; border: 1px solid red; padding: 10px; border-radius: 5px; position: relative;">
+                {{ session('error') }}
+                <span onclick="document.getElementById('error-message').style.display='none';"
+                    style="position: absolute; top: 5px; right: 10px; cursor: pointer; font-weight: bold; color: red;">
+                    &times;
+                </span>
+            </div>
+        @endif
 
         <form action="{{ route('admin.login_submit') }}" method="POST">
             @csrf
