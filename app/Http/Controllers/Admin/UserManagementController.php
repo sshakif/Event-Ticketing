@@ -70,12 +70,33 @@ class UserManagementController extends Controller
         }
     }
 
+    public function userUpdate(Request $request, $userId){
+        try {
+            DB::beginTransaction();
+
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,'.$userId,
+            ]);
+
+            $user = User::find($userId);
+            $user->name = $validatedData['name'];
+            $user->email = $validatedData['email'];
+            $user->password = $request->input('password') ? bcrypt($request->input('password')) : $user->password;
+            $user->save();
+
+            DB::commit();
+
+            return back()->with('success', 'User Updated successfully.');
+        }catch (\Exception $e) {
+           DB::rollBack();
+        }
+    }
 
 
     function store_role(Request $request)
     {
 
-        // dd($request->all());
         $validatedData = $request->validate([
             'role_name' => 'required|unique:roles,name|max:255',
             'permission' => 'required|array',

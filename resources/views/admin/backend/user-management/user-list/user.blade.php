@@ -74,20 +74,29 @@
 
                                         @if (Auth::check())
                                             @if (Auth::user()->role == 'super-admin')
-                                                <button class=" btn btn-info btn-sm" data-bs-toggle="modal"
+                                                <button class=" btn btn-info btn-sm me-2" data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal{{ $key }}">
 
                                                     Assign Role
                                                 </button>
+                                                <button class=" btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModalEdit{{ $user->id }}">
+
+                                                    Edit
+                                                </button>
                                             @elseif (Auth::user()->role == 'admin' && $user->role != 'super-admin')
-                                                <button class=" btn btn-info btn-sm" data-bs-toggle="modal"
+                                                <button class=" btn btn-info btn-sm me-2" data-bs-toggle="modal"
                                                     data-bs-target="#exampleModal{{ $key }}">
 
                                                     Assign Role
+                                                </button>
+                                                <button class=" btn btn-primary btn-sm" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModalEdit{{ $user->id }}">
+
+                                                    Edit
                                                 </button>
                                             @endif
                                         @endif
-
                                     </td>
                                 </tr>
 
@@ -150,6 +159,61 @@
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <!-- Modal for Edit -->
+                                <div class="modal fade" id="exampleModalEdit{{ $user->id }}" tabindex="-1"
+                                    aria-labelledby="editUserLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="editUserLabel">Edit User {{ $user->name }}
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form class="form-style1" action="{{ route('user.update', $user->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="row">
+
+                                                        <div class="mb20">
+                                                            <h5>Name</h5>
+
+                                                            <input type="text" class="form-control" name="name"
+                                                                id="text" value="{{ $user->name }}">
+                                                        </div>
+
+                                                        <div class="mb20">
+                                                            <h5>Email</h5>
+
+                                                            <input type="text" class="form-control" name="email"
+                                                                id="text" value="{{ $user->email }}">
+                                                        </div>
+
+                                                        <div class="mb20">
+                                                            <h5>Password</h5>
+
+                                                            <input type="password" class="form-control" name="password">
+                                                        </div>
+
+
+
+                                                        <div class="col-md-12">
+                                                            <div class="text-start">
+                                                                <button type="submit" class="btn btn-info btn-sm mt-2"
+                                                                    href="page-contact.html">Update User<i
+                                                                        class="fal fa-arrow-right-long"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
                         </tbody>
                     </table>
@@ -208,6 +272,7 @@
             </div>
         </div>
     </div>
+
     <!-- Fix Delete Confirmation -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {

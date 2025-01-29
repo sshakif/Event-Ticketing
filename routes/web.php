@@ -48,6 +48,7 @@ Route::middleware('admin')->group(function(){
 
     // role and permission
     Route::post('/store/user', [UserManagementController::class, 'userStore'])->name('store.user');
+    Route::put('/user/{id}', [UserManagementController::class, 'userUpdate'])->name('user.update');
     Route::get('/role', [UserManagementController::class, 'role'])->name('role');
     Route::get('/assign/role', [UserManagementController::class, 'assign_role'])->name('assign.role');
     Route::post('/save/role', [UserManagementController::class, 'store_role'])->name('store.role');
