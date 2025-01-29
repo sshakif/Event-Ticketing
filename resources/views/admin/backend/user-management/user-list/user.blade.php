@@ -251,13 +251,13 @@
                                     </div>
                                     <div class="mb20">
                                         <h5>Email <span class="text-danger">*</span></h5>
-
+                                        <input type="text" style="display:none" name="email">
                                         <input type="text" class="form-control" name="email" placeholder=""
-                                            autocomplete="off" required>
+                                            required>
                                     </div>
                                     <div class="mb20">
                                         <h5>Password <span class="text-danger">*</span></h5>
-
+                                        <input type="password" style="display:none" name="password">
                                         <input type="password" class="form-control" name="password" placeholder=""
                                             autocomplete="off" required>
                                     </div>
