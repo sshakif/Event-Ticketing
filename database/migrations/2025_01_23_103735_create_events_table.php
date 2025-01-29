@@ -24,6 +24,8 @@ class CreateEventsTable extends Migration
             $table->string('map_location')->nullable();
             $table->date('event_start_date')->nullable();
             $table->date('event_end_date')->nullable();
+            $table->time('event_start_time')->nullable();
+            $table->time('event_end_time')->nullable();
             $table->string('banner_image')->nullable();
             $table->string('banner_image2')->nullable();
             $table->string('banner_image3')->nullable();
