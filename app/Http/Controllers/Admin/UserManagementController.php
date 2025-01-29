@@ -41,12 +41,17 @@ class UserManagementController extends Controller
         try {
             DB::beginTransaction();
 
-
             $validatedData = $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
+                'name' => 'required|string',
+                'email' => 'required|string|email',
                 'password' => 'required|string|min:4',
             ]);
+
+            $user = User::where('email', $validatedData['email'])->first();
+
+            if ($user) {
+                return back()->with('error', 'User with this email already exists.');
+            }
 
             $user = User::create([
                 'name' => $validatedData['name'],
