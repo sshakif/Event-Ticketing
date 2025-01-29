@@ -12,6 +12,7 @@
     {{-- <link rel="shortcut icon" href="{{ asset('backend-assets/images/')}} "> --}}
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    
     <!-- DataTables -->
     <link href="{{ asset('backend-assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} " rel="stylesheet"
         type="text/css" />
@@ -29,6 +30,7 @@
     {{-- <link rel="stylesheet" href="{{ asset('backend-assets/css/preloader.min.css') }}" type="text/css" /> --}}
 
     <!-- Bootstrap Css -->
+
     <link href="{{ asset('backend-assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet"
         type="text/css" />
     <!-- Icons Css -->
@@ -83,7 +85,7 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
-
+   
     <script src="{{ asset('backend-assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('backend-assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('backend-assets/libs/metismenu/metisMenu.min.js') }}"></script>

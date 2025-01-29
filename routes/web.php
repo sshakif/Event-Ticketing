@@ -48,6 +48,10 @@ Route::middleware('admin')->group(function(){
 
     // For Events
     Route::get('/events', [EventController::class, 'index'])->name('events.list');
+    Route::post('/events', [EventController::class, 'store'])->name('events.create');
+    Route::delete('/delete_event/{id}' , [EventController::class, 'Destroy'])->name('event.delete');
+    Route::get('/events/details/{id}' , [EventController::class, 'Show'])->name('event.details');
+    Route::get('/events/edit/{id}' , [EventController::class, 'Edit'])->name('event.edit');
     // end events
 
 

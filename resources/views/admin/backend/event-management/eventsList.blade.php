@@ -9,13 +9,13 @@
                         <div>
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
-                                <li class="breadcrumb-item active">Category List</li>
+                                <li class="breadcrumb-item active">Events List</li>
                             </ol>
-
-                            <h4 class="mb-sm-0 font-size-18 mt-2">Category List</h4>
+                           
+                            <h4 class="mb-sm-0 font-size-18 mt-2">Events List</h4>
                         </div>
                         <div class="page-title-right">
-                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddModal">Add Category
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddModal">Create Event
                             </button>
                         </div>
                     </div>
@@ -36,21 +36,26 @@
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>
-                                <th scope="col"> Name</th>
-                                <th scope="col">Note</th>
-                                <th scope="col">Imges</th>
-                                <th scope="col">Created At </th>
-                                <th scope="col">Actions </th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Start Time</th>
+                                <th scope="col">End Time</th>                                                
+                                <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($categories as $key => $items)
+                            @foreach ($events as $key => $items)
+                          
                                 <tr>
                                     <th scope="row"> #{{ $key + 1 }}</th>
 
                                     <td class="vam" style="width:200px;">
                                         @php
-                                            $note = strip_tags($items->name); // Remove HTML tags from the text
+                                            $note = strip_tags($items->title); // Remove HTML tags from the text
                                         @endphp
 
                                         {!! \Illuminate\Support\Str::limit($note, 15, '...') !!}
@@ -59,39 +64,35 @@
                                             <a data-bs-toggle="modal" data-bs-target="#ViewNote{{ $key }}"
                                                 style="color: rgb(56, 56, 255); cursor: pointer;">See more</a>
                                         @endif
-
-                                    </td>
-
-                                    <td class="vam" style="width:200px;">
-                                        @php
-                                            $note = strip_tags($items->note); // Remove HTML tags from the text
-                                        @endphp
-
-                                        {!! \Illuminate\Support\Str::limit($note, 50, '...') !!}
-
-                                        @if (strlen($note) > 50)
-                                            <a data-bs-toggle="modal" data-bs-target="#ViewNote{{ $key }}"
-                                                style="color: rgb(56, 56, 255); cursor: pointer;">See more</a>
-                                        @endif
-
                                     </td>
                                     <td class="vam">
-                                        <div data-bs-toggle="modal"
-                                            @if ($items->file_path) data-bs-target="#ViewImg{{ $key }}" @endif
-                                            style="width: 120px; height:80px; overflow:hidden; border-radius:8px; cursor: pointer;">
-                                            <img style="width: 100%; height:100%;   background-size:cover;" src="{{ $items->file_path }}">
-                                        </div>
-                                    </td>
 
-                                    <td>{{ \Carbon\Carbon::parse($items->created_at)->format('m, M, Y') }}</td>
+                                        {{ $items->ticket_price }}
+                                    </td>
+                                    <td>{{ ($items->category) ? $items->category->name : 'Not Provided' }}</td>
+                                    <td class="vam">
+                                        {{ $items->event_address }}
+                                    </td>
+                                    <td>{{ \Carbon\Carbon::parse($items->event_start_date)->format('d, M, Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($items->event_end_date)->format('d, M, Y') }}</td>
+
+                                    <td>{{ \Carbon\Carbon::parse($items->event_start_time)->format('h:i A') }}</td>
+                                       
+                                    <td>{{ \Carbon\Carbon::parse($items->event_end_time)->format('h:i A') }}</td>
+                                
+
+
                                     <td style="display:flex; align-items:center; gap:8px;">
 
-                                        <form action="{{ route('category.edit', $items->id) }}" method="GET"> <button
+                                        <form action="{{ route('event.edit', $items->id) }}" method="GET"> <button
                                                 class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></button></form>
-
 
                                         <button data-bs-toggle="modal" data-bs-target="#exampleModaldel{{ $key }}"
                                             class="btn btn-danger btn-sm "><i class="fa fa-trash"></i></button>
+
+                                       
+                                        <form action="{{ route('event.details', $items->id) }}" method="GET"> <button
+                                            class="btn btn-info btn-sm"><i class="fa fa-eye"></i></button></form>
                                     </td>
                                 </tr>
                                 </tr>
@@ -110,7 +111,7 @@
 
                                                 <div class="d-flex mt-3  gap-1">
                                                     <button data-bs-dismiss="modal" class="btn btn-primary">Cancel</button>
-                                                    <form action="{{ route('category.delete', $items->id) }}"
+                                                    <form action="{{ route('event.delete', $items->id) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('DELETE')
@@ -175,135 +176,225 @@
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add Category</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create event</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="ps-widget bgc-white bdrs4 p30  overflow-hidden position-relative">
+                    <form action="{{ route('events.create') }}" class="p-2" enctype="multipart/form-data"
+                        method="POST">
+                        @csrf
+                        @method('POST')
+                        <div class="form-row d-flex gap-3 border p-3 rounded">
+                            <div class="form-group w-full" style="width: 100%">
+                                <label for="title">Title</label>
+                                <input type="text" name="title" class="form-control" id="title"
+                                    placeholder="Type to title">
+                            </div>
 
-                        <div class="col-xl">
+                            <div class="form-group w-full" style="width: 100%">
+                                <label for="title">Select Category</label>
+                                <select name="category_id" class="form-select">
 
-                            <form class="form-style1" action="{{ route('category.add') }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <div class="row">
-                                    <div class="mb20">
-                                        <h5> Category Name </h5>
 
-                                        <input type="text" class="form-control" name="name" placeholder="">
-                                        @error('name')
-                                            <div class="text-danger">
-                                                {{ $message }}
-                                            </div>
+                                    @foreach ($category as $id => $categoryList)
+                                        <option value="{{ $categoryList->id }}" selected>{{ $categoryList->name }}
+                                        </option>
+                                    @endforeach
+                                    <option value="" selected>Select Category</option>
+                                </select>
+                            </div>
+                        </div>
 
-                                            @endif
-                                        </div>
-                                        <div class="mb20 mt-2">
-                                            <h5 class="my-1">Category Image </h5>
-                                            <input type="file" class="form-control" name="image" placeholder="">
-                                            @error('image')
-                                                <div class="text-danger">
-                                                    {{ $message }}
-                                                </div>
 
-                                                @endif
-                                            </div>
-                                            <div class="mb20 mt-2">
-                                                <h5 class="my-1">Write Note</h5>
-                                                <div class="mb-1">
-                                                    <div id="quill-editor" class="mb-3" style="min-height: 170px;">
-                                                    </div>
-                                                    <textarea name="note" rows="3" class="mb-3 d-none" name="body" id="quill-editor-area"></textarea>
-                                                    @error('note')
-                                                        <div class="text-danger">
-                                                            {{ $message }}
-                                                        </div>
+                        {{-- addres --}}
+                        <div class="form-row d-flex flex-column align-items-center mt-2  border p-3 rounded">
+                            <div class="form-group w-full" style="width: 100%">
+                                <label for="title">Map Url</label>
+                                <input name="map_location" type="text" class="form-control" id="title"
+                                    placeholder="Type to map url">
+                            </div>
 
-                                                        @endif
-                                                    </div>
-                                                </div>
+                            <div class="form-floating w-100  mt-2">
+                                <textarea name="event_address" class="form-control" style="max-height: 100px;" placeholder="Leave a comment here"
+                                    id="floatingTextarea"></textarea>
+                                <label for="floatingTextarea">Write address</label>
+                            </div>
+                        </div>
 
-                                                <div class="col-md-12">
-                                                    <div class="text-start">
-                                                        <button type="submit" class="btn btn-info  mt-2">
-                                                            Add Category
-                                                            <i class="fal fa-arrow-right-long"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+
+
+                        {{-- start date --}}
+                        <div class="border p-3 mt-2  rounded">
+                            <div class="form-row d-flex gap-3 mt-2">
+                                <div class="form-group  w-100">
+                                    <label for="title">Start Date</label>
+                                    <input name="event_start_date" type="date" class="form-control" id="title"
+                                        placeholder="Type to title">
+                                </div>
+                                <div class="form-group w-100">
+                                    <label for="dsc">End Date</label>
+                                    <input name="event_end_date" type="date" class="form-control" id="dsc"
+                                        placeholder="Short description">
                                 </div>
                             </div>
 
+                            {{-- start time --}}
+
+                            <div class="form-row d-flex gap-3 mt-2">
+                                <div class="form-group w-100">
+                                    <label for="title">Start Time</label>
+                                    <input name="event_start_time" type="time" class="form-control" id="title"
+                                        placeholder="Type to title">
+                                </div>
+                                <div class="form-group w-100">
+                                    <label for="dsc">End Time</label>
+                                    <input name="event_end_time" type="time" class="form-control" id="dsc"
+                                        placeholder="end time">
+                                </div>
+                            </div>
                         </div>
+                        {{-- sel price and map loc --}}
+                        <div class="form-row d-flex gap-3 border p-3 mt-2 rounded">
+                            <div class="form-group w-full" style="width: 100%">
+                                <label for="title">Price</label>
+                                <input name="ticket_price" type="text" class="form-control" id="title"
+                                    placeholder="$00">
+                            </div>
+
+
+                        </div>
+
+                        {{-- select banner img --}}
+
+                        <div style="border: 1px solid #ddd; border-radius:12px;" class="mt-3">
+                            <label style="border-bottom:1px solid #ddd; width:100%; padding:4px 12px; font-size:19px;"
+                                for="title">Select Images</label>
+                            <div style=" width:100%; padding:12px;" class="d-flex  gap-3 mt-2">
+                                <div class="w-100 ">
+                                    <label for="title">Banner image-1</label>
+                                    <input name="banner_image" type="file" class="form-control" id="title"
+                                        placeholder="Type to title">
+                                </div>
+                                <div class="form-group w-100">
+                                    <label for="dsc">Banner image-2</label>
+                                    <input name="banner_image2" type="file" class="form-control" id="dsc"
+                                        placeholder="Short description">
+                                </div>
+
+
+                            </div>
+
+                            <div style=" width:100%; padding:12px;" class="d-flex  gap-3 mt-2">
+                                <div class="w-100 ">
+                                    <label for="title">Banner image-3</label>
+                                    <input name="banner_image3" type="file" class="form-control" id="title"
+                                        placeholder="Type to title">
+                                </div>
+                                <div class="form-group w-100 ">
+                                    <label for="dsc">Slider image</label>
+                                    <input name="slider_image" type="file" class="form-control" id="dsc"
+                                        placeholder="Short description">
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        {{-- short desc --}}
+                        <div class="form-floating  mt-3">
+                            <textarea name="short_description" class="form-control" style="max-height: 100px;"
+                                placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                            <label for="floatingTextarea">Write short description</label>
+                        </div>
+
+                        {{-- large desc --}}
+
+                        <div class="mb20 mt-3">
+                            <h5 class="my-1 py-1">Description</h5>
+                            <div class="mb-1">
+                                <div id="quill-editor" class="mb-3" style="min-height: 170px;">
+                                </div>
+                                <textarea name="description" rows="3" class="mb-3 d-none" name="body" id="quill-editor-area"></textarea>
+                                @error('note')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+
+                                    @endif
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success">Create Event</button>
+                        </form>
                     </div>
+
                 </div>
+            </div>
+        </div>
 
 
 
-                {{-- end dailog --}}
-                <!-- Fix Delete Confirmation -->
-                <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        // Handle "See More" click event
-                        document.querySelectorAll(".see-more-btn").forEach(function(btn) {
-                            btn.addEventListener("click", function() {
-                                let fullDescription = this.getAttribute("data-desc");
-                                document.getElementById("modalDescription").innerHTML = fullDescription;
-                            });
-                        });
-
-                        // Handle delete confirmation
-                        document.querySelectorAll(".delete-button").forEach(function(button) {
-                            button.addEventListener("click", function() {
-                                let aboutId = this.getAttribute("data-id");
-                                if (confirm("Are you sure you want to delete this?")) {
-                                    document.getElementById("delete-form-" + aboutId).submit();
-                                }
-                            });
-                        });
+        {{-- end dailog --}}
+        <!-- Fix Delete Confirmation -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Handle "See More" click event
+                document.querySelectorAll(".see-more-btn").forEach(function(btn) {
+                    btn.addEventListener("click", function() {
+                        let fullDescription = this.getAttribute("data-desc");
+                        document.getElementById("modalDescription").innerHTML = fullDescription;
                     });
-                </script>
+                });
 
-                <script type="text/javascript">
-                    document.addEventListener('DOMContentLoaded', function() {
-                        if (document.getElementById('quill-editor-area')) {
-                            var editor = new Quill('#quill-editor', {
-                                theme: 'snow'
-                            });
-                            var quillEditor = document.getElementById('quill-editor-area');
-                            editor.on('text-change', function() {
-                                quillEditor.value = editor.root.innerHTML;
-                            });
-
-                            quillEditor.addEventListener('input', function() {
-                                editor.root.innerHTML = quillEditor.value;
-                            });
+                // Handle delete confirmation
+                document.querySelectorAll(".delete-button").forEach(function(button) {
+                    button.addEventListener("click", function() {
+                        let aboutId = this.getAttribute("data-id");
+                        if (confirm("Are you sure you want to delete this?")) {
+                            document.getElementById("delete-form-" + aboutId).submit();
                         }
                     });
-                </script>
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', function() {
+                if (document.getElementById('quill-editor-area')) {
+                    var editor = new Quill('#quill-editor', {
+                        theme: 'snow'
+                    });
+                    var quillEditor = document.getElementById('quill-editor-area');
+                    editor.on('text-change', function() {
+                        quillEditor.value = editor.root.innerHTML;
+                    });
+
+                    quillEditor.addEventListener('input', function() {
+                        editor.root.innerHTML = quillEditor.value;
+                    });
+                }
+            });
+        </script>
 
 
-                <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
-                <!-- ✅ Fix Long Description Styling -->
-                <style>
-                    .description-box {
-                        max-width: 250px;
-                        /* Prevents the column from being too wide */
-                        max-height: 60px;
-                        /* Limits height */
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                    }
+        <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+        <!-- ✅ Fix Long Description Styling -->
+        <style>
+            .description-box {
+                max-width: 250px;
+                /* Prevents the column from being too wide */
+                max-height: 60px;
+                /* Limits height */
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
 
-                    .description-box .see-more-btn {
-                        display: block;
-                        color: blue;
-                        text-decoration: underline;
-                        cursor: pointer;
-                        font-size: 12px;
-                    }
-                </style>
-            @endsection
+            .description-box .see-more-btn {
+                display: block;
+                color: blue;
+                text-decoration: underline;
+                cursor: pointer;
+                font-size: 12px;
+            }
+        </style>
+    @endsection
