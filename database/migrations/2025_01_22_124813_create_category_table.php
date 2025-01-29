@@ -19,9 +19,12 @@ class CreateCategoryTable extends Migration
             $table->text('note')->nullable();
             $table->string('file_path')->nullable();
             $table->string('mime_type')->nullable();
+            $table->boolean('status')->default(1);
 
             $table->bigInteger("created_by")->unsigned()->nullable();
             $table->bigInteger("updated_by")->unsigned()->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
