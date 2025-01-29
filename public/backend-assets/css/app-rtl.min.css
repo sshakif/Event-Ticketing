@@ -300,7 +300,7 @@ body[data-layout=horizontal] .navbar-brand-box {
   }
 }
 body[data-layout=horizontal] .page-content {
-  margin-top: 70px;
+  margin-top: 20px;
   padding: calc(55px + 1.5rem) calc(1.5rem / 2) 60px calc(1.5rem / 2);
 }
 @media (min-width: 992px) {

@@ -2,14 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\UserManagementController;
 use Spatie\Permission\Middlewares\PermissionMiddleware;
 
 //Frontend Route List
 Route::get('/', [UserController::class, 'Index'])->name('index');
 Route::get('/about', [UserController::class, 'About'])->name('about');
+Route::get('/events', [UserController::class, 'Events'])->name('events');
+Route::get('/event/details/{id}' , [UserController::class, 'Details'])->name('details');
+Route::get('/terms-conditions' , [UserController::class, 'Terms'])->name('terms');
+Route::get('/privacy-policy' , [UserController::class, 'Privacy'])->name('privacy');
+Route::get('/event/details/{id}' , [UserController::class, 'Details'])->name('details');
 
 
 Route::get('/dashboard', function () {
@@ -34,6 +39,12 @@ Route::middleware('admin')->group(function(){
 
     //For Category
     Route::get('/category', [CategoryController::class, 'index'])->name('category.list');
+    Route::post('/add_category' , [CategoryController::class, 'Store'])->name('category.add');
+    Route::delete('/delete_category/{id}' , [CategoryController::class, 'Destroy'])->name('category.delete');
+    Route::get('/category/edit/{id}' , [CategoryController::class, 'Edit'])->name('category.edit');
+    Route::put('/category/update/{id}' , [CategoryController::class, 'Update'])->name('category.update');
+    // end cateogry
+
 
     // role and permission
     Route::post('/store/user', [UserManagementController::class, 'userStore'])->name('store.user');

@@ -606,8 +606,13 @@ body[data-layout="horizontal"] .footer {
     }
     body.sidebar-enable .vertical-menu {
         display: block;
-    }
+    } 
 }
+
+
+
+
+
 body[data-sidebar-size="sm"] {
     min-height: 1000px;
 }

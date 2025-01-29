@@ -10,7 +10,8 @@
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     {{-- <link rel="shortcut icon" href="{{ asset('backend-assets/images/')}} "> --}}
-
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <!-- DataTables -->
     <link href="{{ asset('backend-assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }} " rel="stylesheet"
         type="text/css" />
@@ -39,7 +40,14 @@
 
 
 </head>
+<style>
+    .sidebar-enable .footer{
+         position: relative !important;
+         bottom: 0 !important;
+         z-index: 4;
+    }
 
+</style>
 <body>
 
     <!-- <body data-layout="horizontal"> -->
@@ -75,6 +83,7 @@
     <div class="rightbar-overlay"></div>
 
     <!-- JAVASCRIPT -->
+
     <script src="{{ asset('backend-assets/libs/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('backend-assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('backend-assets/libs/metismenu/metisMenu.min.js') }}"></script>
