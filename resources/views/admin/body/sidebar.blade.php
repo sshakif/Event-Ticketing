@@ -21,6 +21,7 @@
                         </a>
                     </li>
                 @endcan
+
                 @canAny(['admin'])
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">
@@ -33,6 +34,19 @@
                         </ul>
                     </li>
                 @endcan
+
+                @canAny(['admin'])
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span data-key="t-email">Events Management</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                       
+                        <li><a href="{{ route('events.list') }}">View Events</a></li>
+                    </ul>
+                </li>
+            @endcan
 
         </div>
     </div>

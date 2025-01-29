@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.backend.event-management.eventsList');
     }
 
     /**

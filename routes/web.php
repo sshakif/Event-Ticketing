@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\UserManagementController;
 use Spatie\Permission\Middlewares\PermissionMiddleware;
@@ -44,6 +45,10 @@ Route::middleware('admin')->group(function(){
     Route::get('/category/edit/{id}' , [CategoryController::class, 'Edit'])->name('category.edit');
     Route::put('/category/update/{id}' , [CategoryController::class, 'Update'])->name('category.update');
     // end cateogry
+
+    // For Events
+    Route::get('/events', [EventController::class, 'index'])->name('events.list');
+    // end events
 
 
     // role and permission
