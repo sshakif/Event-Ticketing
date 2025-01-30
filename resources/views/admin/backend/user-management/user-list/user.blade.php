@@ -20,12 +20,16 @@
                             </button>
                         </div>
                     </div>
-
-
-
                     @if (session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
@@ -240,19 +244,22 @@
                                 <div class="row">
 
                                     <div class="mb20">
-                                        <h5>Name </h5>
+                                        <h5>Name <span class="text-danger">*</span></h5>
 
-                                        <input type="text" class="form-control" name="name" placeholder="">
+                                        <input type="text" class="form-control" name="name" placeholder=""
+                                            required>
                                     </div>
                                     <div class="mb20">
-                                        <h5>Email </h5>
-
-                                        <input type="text" class="form-control" name="email" placeholder="">
+                                        <h5>Email <span class="text-danger">*</span></h5>
+                                        <input type="text" style="display:none" name="email">
+                                        <input type="text" class="form-control" name="email" placeholder=""
+                                            required>
                                     </div>
                                     <div class="mb20">
-                                        <h5>Password </h5>
-
-                                        <input type="password" class="form-control" name="password" placeholder="">
+                                        <h5>Password <span class="text-danger">*</span></h5>
+                                        <input type="password" style="display:none" name="password">
+                                        <input type="password" class="form-control" name="password" placeholder=""
+                                            autocomplete="off" required>
                                     </div>
 
 

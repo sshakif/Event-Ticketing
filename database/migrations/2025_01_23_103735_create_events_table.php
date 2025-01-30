@@ -30,9 +30,12 @@ class CreateEventsTable extends Migration
             $table->string('banner_image2')->nullable();
             $table->string('banner_image3')->nullable();
             $table->string('slider_image')->nullable();
+            $table->boolean('status')->default(1);
 
             $table->bigInteger("created_by")->unsigned()->nullable();
             $table->bigInteger("updated_by")->unsigned()->nullable();
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }
