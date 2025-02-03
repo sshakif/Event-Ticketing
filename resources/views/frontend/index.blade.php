@@ -273,9 +273,7 @@
                                                     @if ($items->event_start_time)
                                                         {{ \Carbon\Carbon::parse($items->event_start_time)->format('h:i A') }}
                                                     @endif
-                                                    {{-- @if ($items->event_end_time)
-                                                    {{ 'To ' . \Carbon\Carbon::parse($items->event_end_time)->format('h:i A') }}
-                                                @endif --}}
+                                                
                                                 </a>
                                             </li>
                                             <li>
@@ -312,33 +310,30 @@
 
         <section class="container text-center" style="text-align: center;">
             <h1 class="my-4 py-4 ">Categorys</h1>
-            <swiper-container 
-            class="mySwiper w-100 customize-swiper" 
-            autoplay-delay="2500"
-            slides-per-view="4"
-            space-between="25"
-            free-mode="true"
-            breakpoints='{
+            <swiper-container class="mySwiper w-100 customize-swiper" autoplay-delay="2500" slides-per-view="4"
+                space-between="25" free-mode="true"
+                breakpoints='{
+                "1350": { "slidesPerView": 5, "spaceBetween": 20 },
                 "1024": { "slidesPerView": 4, "spaceBetween": 20 },
-                "768": { "slidesPerView": 2, "spaceBetween": 15 },
-                "480": { "slidesPerView": 1, "spaceBetween": 10 }
-            }'
-        >
-            @foreach ($categories as $key => $items)
-                <swiper-slide class="p-4 rounded" style="border: 1px solid #1d1d1ddd; background:#010214dd">
-                    <a class="events-cat" href="/events">
-                        <li style="cursor: pointer;">
-                            <div class="catagory-card">
-                                <div class="catagory-img">
-                                    <img src="{{ asset($items->file_path) }}" alt="">
+                "750": { "slidesPerView": 3, "spaceBetween": 15 },
+                "450": { "slidesPerView": 2, "spaceBetween": 15 },
+                "300": { "slidesPerView": 1, "spaceBetween": 10 }
+            }'>
+                @foreach ($categories as $key => $items)
+                    <swiper-slide class="p-4 rounded" style="border: 1px solid #222222dd; background:#01031cdd">
+                        <a class="events-cat" href="/view-events?category={{$items->id}}">
+                            <li style="cursor: pointer;">
+                                <div class="catagory-card">
+                                    <div class="catagory-img">
+                                        <img src="{{ asset($items->file_path) }}" alt="">
+                                    </div>
+                                    <b>{{ $items->name }}</b>
                                 </div>
-                                <b>{{ $items->name }}</b>
-                            </div>
-                        </li>
-                    </a>
-                </swiper-slide>
-            @endforeach
-        </swiper-container>
+                            </li>
+                        </a>
+                    </swiper-slide>
+                @endforeach
+            </swiper-container>
         </section>
         <!--Site Footer Start-->
         @include('frontend.layouts.footer')

@@ -99,7 +99,7 @@
         <!--Page Header End-->
 
         <!-- Event Page Start -->
-        <section class="event-page">
+        <section class="event-page ">
             <div style="justify-content: center; padding:12px 21px; " class=" event-view">
 
 
@@ -107,26 +107,14 @@
                 <div class="sidebar__single sidebar__all-category">
                     <h3 class="sidebar__title">Catagory</h3>
                     <ul class="sidebar__all-category-list list-unstyled">
-                        <li>
-                            <a href="blog-details.html"><i class="icon-double-angle"></i>Event Prodigy
-                                <span>(02)</span></a>
+                     
+                       @foreach($category_with_number as $category)
+                        <li class="d-flex">
+                            <a href="/view-events?category={{$category->id}}"><i class="icon-double-angle"></i>
+                                {{$category->name}}
+                                <span>({{$category->events_count}})</span></a>
                         </li>
-                        <li>
-                            <a href="blog-details.html"><i class="icon-double-angle"></i>Stellar Events
-                                Co<span>(04)</span></a>
-                        </li>
-                        <li class="active">
-                            <a href="blog-details.html"><i class="icon-double-angle"></i>Elite Event
-                                Management<span>(01)</span></a>
-                        </li>
-                        <li>
-                            <a href="blog-details.html"><i class="icon-double-angle"></i>Infinite
-                                Occasions<span>(06)</span></a>
-                        </li>
-                        <li>
-                            <a href="blog-details.html"><i class="icon-double-angle"></i>Dream Event
-                                Planners<span>(03)</span></a>
-                        </li>
+                       @endforeach
                     </ul>
                 </div>
                 {{-- end catagory --}}
@@ -169,8 +157,8 @@
                             {{-- srch bar --}}
                             <div class="">
 
-                                <form action="#" class="sidebar__search-form">
-                                    <input type="search" class="search-bar" placeholder="Type to search events">
+                                <form action="{{route('events')}}" class="sidebar__search-form">
+                                    <input type="search" class="search-bar" name="search" placeholder="Type to search events">
                                     <button type="submit"><i class="fa  fa-search"></i></button>
                                 </form>
                             </div>
@@ -183,16 +171,27 @@
                             <div class="tabs-content">
                                 <div class="schedule-one__tab-content-box">
                                     <div class="schedule-one__single">
-                                        <div class="schedule-one__left">
-                                            <h2 class="schedule-one__title"><a href="/event/details/{{$items->id}}">
-                                                {{$items->title}}
-                                                </a></h2>
-                                            <p class="schedule-one__text py-3">{{$items->short_description}}</p>
-                                        </div>
-                                        <div class="schedule-one__img">
-                                            <img src="{{ $items->slider_image }}"
-                                                alt="">
-                                        </div>
+                                     <div class="event-content" >
+                                      <div class="schedule-one__left">
+                                        <h1 class="schedule-one__title"><a href="/event/details/{{$items->id}}">
+                                            {{$items->title}}
+                                            </a></h1>
+                                        <p class="schedule-one__text py-3">
+
+                                            {!! \Illuminate\Support\Str::limit($items->short_description, 80, '...') !!}
+
+                                            @if (strlen($items->short_description) > 80)
+                                                <a href="event/details/{{$items->id}}"
+                                                    style="color: rgb(49, 207, 255); cursor: pointer;">See more</a>
+                                            @endif
+
+                                        </p>
+                                      </div>
+                                      <div class="schedule-one__img">
+                                        <img src="{{ $items->slider_image }}"
+                                            alt="">
+                                      </div>
+                                      </div>
                                         <div class="schedule-one__address-and-btn-box">
                                             <ul class="list-unstyled schedule-one__address">
                                                 <li>
@@ -200,20 +199,20 @@
                                                         <span class="icon-clock"></span>
                                                     </div>
                                                     <div class="text">
-                                                        <p>{{$items->event_start_time ?  \Carbon\Carbon::parse($items->event_start_time)->format('h:i A')  :"Not provided"}} To {{$items->event_end_time ? \Carbon\Carbon::parse($items->event_end_time)->format('h:i A')  : "Not provided" }} <br> 
-                                                        {{$items->event_start_date ? \Carbon\Carbon::parse($items->event_start_date)->format('d, M, Y')  :"Not provided"}} <span class="px-1">To</span> 
-                                                        {{$items->event_end_date ?  \Carbon\Carbon::parse($items->event_end_date)->format('d, M, Y')   :"Not provided"}}
+                                                        <p>{{$items->event_start_time ?  \Carbon\Carbon::parse($items->event_start_time)->format('h:i A')  : null}}  {{$items->event_end_time ? "To ".\Carbon\Carbon::parse($items->event_end_time)->format('h:i A')  : null }} <br> 
+                                                        {{$items->event_start_date ? \Carbon\Carbon::parse($items->event_start_date)->format('d, M, Y')  : null}} 
+                                                        {{$items->event_end_date ?  "to".\Carbon\Carbon::parse($items->event_end_date)->format('d, M, Y')   : null}}
                                                         </p>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-pin"></span>
-                                                    </div>
-                                                    <div class="text">
+
+                                                        
+                                                    <div class="text mt-3">
                                                         <p>{{$items->event_address}}</p>
                                                     </div>
+                                                    </div>
+
+                                                   
                                                 </li>
+                                                
                                             </ul>
                                             <div class="schedule-one__btn-box">
                                                 <a href="/event/details/{{$items->id}}" class="schedule-one__btn thm-btn">Buy

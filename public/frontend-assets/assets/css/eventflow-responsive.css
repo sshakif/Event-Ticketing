@@ -1,4 +1,20 @@
-@media only screen and (min-width: 1200px) and (max-width: 1319px) {
+@media only screen and (min-width: 1200px) and (max-width: 1519px) {
+    .schedule-one__btn-box  .schedule-one__btn {
+        padding: 9px 12px;
+        width: 150px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+ 
+    .schedule-one__address-and-btn-box {
+     
+       align-items: center;
+        gap: 20px;
+        padding-top: 45px;
+    }
+   
     .services-one__single {
         padding: 38px 20px 37px;
     }
@@ -164,7 +180,7 @@
     }
 
     .schedule-one__left {
-        text-align: center;
+        text-align: left;
     }
 
     .schedule-one__img {
@@ -707,7 +723,45 @@
 
 /* Mobile Layout: 320px. */
 @media only screen and (max-width: 767px) {
-    
+    .sidebar__all-category {
+        position: relative;
+        display: block;
+      width: 100%;
+        border-radius: 20px;
+        background-color: #0E0A17;
+        text-align: center;
+        padding: 25px 19px;
+      
+      }
+    .schedule-one__left {
+        text-align: left;
+    }
+    .schedule-one__single {
+        position: relative;
+        display: grid;
+       
+        justify-content: space-between;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+        background-color: rgba(var(--eventflow-white-rgb), .08);
+        border-radius: 20px;
+        padding: 30px 40px 30px;
+        margin-bottom: 30px;
+        z-index: 1;
+      }
+      /* event img */
+      
+      .schedule-one__img {
+        position: relative;
+        display: block;
+        max-width:100%;
+        width: 100%;
+        border-radius: 20px;
+        overflow: hidden;
+        z-index: 1;
+      }
+ 
+
+
     .swiper-slide{
         height: 100vh;
     }
@@ -874,11 +928,13 @@
     .schedule-one__img {
         margin-top: 30px;
         margin-bottom: 30px;
+   
     }
+    
 
     .schedule-one__address-and-btn-box {
         flex-direction: column;
-        align-items: baseline;
+       align-items: center;
         gap: 20px;
     }
 

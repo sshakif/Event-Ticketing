@@ -184,10 +184,10 @@
                                     {{ $items->short_description }}
                                 </p>
                                 <p class="blog-details__text-2">
-                                    {{ strip_tags($items->description) }}
+                                    {!! $items->description !!}
                                 </p>
-                          
-                    
+
+
 
                             </div>
 
@@ -200,7 +200,7 @@
                                     <h3 class="sidebar__title">Ticket Price</h3> <b
                                         class="price-number">${{ $items->ticket_price }}</b>
                                 </div>
-                                <div class="ticket-view">                  
+                                <div class="ticket-view">
                                     <div class="py-2 px-2 rounded w-100  " style="border: 1px solid #181818">
                                         <div class="py-2 px-2 rounded w-100  " style="border: 1px solid #181818">
                                             <table class="  w-100 " style="background:none;">
@@ -229,6 +229,13 @@
                                         </div>
 
                                         <div class="py-2 px-2 rounded w-100 mt-2 " style="border: 1px solid #181818">
+
+                                            @if (session('success'))
+                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                {{ session('success') }}
+                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                            </div>
+                                        @endif
                                             <table class="  w-100 " style="background:none;">
                                                 <tr class="text-xs">
                                                     <th>End Date</th>
@@ -269,30 +276,60 @@
                                             <h5 id="count-display" class="count-display"></h5>
                                             <button class="plus">+</button>
                                         </div>
-                                    </div>
 
-                                    <form class="contact-form-validated contact-one__form" action=""
-                                        method="post" novalidate="novalidate">
+                                    </div>
+                                    <span class="text-danger">
+                                        @error('tickets')
+                                            {{ $message }}
+                                        @enderror
+                                    </span>
+
+                                    <form class="contact-one__form" action="{{ route('ticket.request') }}"
+                                        method="POST" novalidate="novalidate">
+                                        @csrf
+                                        @method('POST')
                                         <div class="row">
                                             <div class="">
                                                 <div class="contact-one__input-box">
                                                     <label for="">Name</label>
                                                     <input type="text" name="name" placeholder="Your Name"
                                                         required="">
+                                                    <span class="text-danger">
+                                                        @error('name')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </div>
+                                            {{-- hidden --}}
+                                            <input type="text" hidden class="ticket_count" name="participant">
+                                            <input type="text" hidden class="ticket_price" name="total_amount">
+                                            <input type="text" hidden class="event_id"
+                                                value="{{ $items->id }}" name="event_id">
+                                            {{-- end --}}
                                             <div class="">
                                                 <div class="contact-one__input-box">
                                                     <label for="">Email</label>
                                                     <input type="email" name="email" placeholder="Type email"
                                                         required="">
+
+                                                    <span class="text-danger">
+                                                        @error('email')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="">
                                                 <div class="contact-one__input-box">
                                                     <label for="">Phone Number</label>
-                                                    <input type="text" name="Phone"
+                                                    <input type="text" name="phone"
                                                         placeholder="Type to phone number" required="">
+                                                    <span class="text-danger">
+                                                        @error('phone')
+                                                            {{ $message }}
+                                                        @enderror
+                                                    </span>
                                                 </div>
                                             </div>
 
@@ -306,13 +343,17 @@
                                             </div>
 
                                         </div>
+                                        <button type="submit" style="background: none; outline:none; border:none;"
+                                            class="w-100">
+                                            <div class="pay-section">
+                                                Pay now
+                                            </div>
+                                        </button>
                                     </form>
                                 </div>
 
 
-                                <div class="pay-section">
-                                    Pay Now
-                                </div>
+
                             </div>
 
 
@@ -377,6 +418,8 @@
     <script>
         let Incriment = document.querySelector('.plus');
         let Decrement = document.querySelector('.min');
+        let Ticekt_price = document.querySelector('.ticket_price');
+        let ticket_count = document.querySelector('.ticket_count');
         let Count = 0;
 
         if (Count < 1) {
@@ -387,6 +430,8 @@
             Count += 1;
             document.getElementById('price-bar').innerHTML = Count * {{ $items->ticket_price }}
             document.querySelector('.count-display').innerHTML = Count;
+            ticket_count.value = Count;
+            Ticekt_price.value = Count * {{ $items->ticket_price }}
 
         });
         Decrement.addEventListener('click', () => {
@@ -394,7 +439,8 @@
                 Count -= 1;
                 document.getElementById('price-bar').innerHTML = Count * {{ $items->ticket_price }}
                 document.querySelector('.count-display').innerHTML = Count;
-
+                ticket_count.value = Count;
+                Ticekt_price.value = Count * {{ $items->ticket_price }}
             }
 
         });

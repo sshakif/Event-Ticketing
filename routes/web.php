@@ -17,6 +17,9 @@ Route::get('/terms-conditions' , [UserController::class, 'Terms'])->name('terms'
 Route::get('/privacy-policy' , [UserController::class, 'Privacy'])->name('privacy');
 Route::get('/event/details/{id}' , [UserController::class, 'Details'])->name('details');
 
+// ticket request
+Route::post('/event/ticket-request' , [UserController::class, 'Request_ticket'])->name('ticket.request');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

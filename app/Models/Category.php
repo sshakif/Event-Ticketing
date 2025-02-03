@@ -18,4 +18,9 @@ class Category extends Model
         'updated_by'
 
     ];
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }
