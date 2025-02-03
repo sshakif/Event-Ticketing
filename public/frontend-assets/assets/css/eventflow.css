@@ -1004,6 +1004,7 @@ ul {
   -webkit-transform: translateY(0);
   transform: translateY(0);
   visibility: visible;
+  backdrop-filter: blur(5px);
 }
 
 .mobile-nav__buttons {
@@ -1536,22 +1537,27 @@ ul {
   display: block;
   background-color: var(--eventflow-black);
   z-index: 91;
-  overflow: hidden;
+
+
+
+  
 }
 
 .main-slider .swiper-slide {
   position: relative;
   background-color: var(--eventflow-black);
+
+
+  
 }
 
 .main-slider__img {
-  position: absolute;
-  top: 140px;
-  right: 350px;
-  opacity: 0;
-  -webkit-transform: perspective(400px) rotateY(0deg) translateX(400px);
-  -ms-transform: perspective(400px) rotateY(0deg) translateX(400px);
-  transform: perspective(400px) rotateY(0deg) translateX(400px);
+
+  width: 100%;
+  height: 100%;
+ opacity: 0;
+
+
   -webkit-transform-origin: top;
   -ms-transform-origin: top;
   transform-origin: top;
@@ -1559,13 +1565,24 @@ ul {
   -moz-transition: all 2000ms ease;
   -ms-transition: all 2000ms ease;
   -o-transition: all 2000ms ease;
-  transition: all 2000ms ease;
+  transition: all 2000ms ease; 
+animation-name: hero;
+animation-duration: 0.5s;
+}@keyframes hero{
+  0% , 50% , 100%{
+    scale: 1.2;
+    transition: all 0.5s;
+  }
 }
 
 .main-slider__img img {
   width: auto;
-  border: 3px solid #41102B;
-  border-radius: 20px;
+
+height: 100%;
+  width: 100%;
+
+  background-size: cover;
+
 }
 
 .main-slider .swiper-slide-active .main-slider__img {
@@ -1709,15 +1726,30 @@ ul {
 
 .main-slider .container {
   position: relative;
-  padding-top: 226px;
-  padding-bottom: 194px;
+margin-top: 23px;
+ 
   z-index: 30;
 }
 
 .main-slider__content {
-  position: relative;
-  display: block;
-  z-index: 15;
+position: absolute;
+left: 50%;
+top: 50%;
+width: 100%;
+height: 100%;
+transform: translate(-50%, -50%);
+backdrop-filter: blur(8px);
+background-color: #00000066;
+display: flex;
+justify-content: flex-start;
+align-items: center;
+
+}.main-slider__content > div{
+  width: 60%;
+  height: auto;
+  text-align: left;
+margin: auto;
+
 }
 
 .main-slider__sub-title {

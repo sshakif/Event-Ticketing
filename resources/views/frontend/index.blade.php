@@ -159,220 +159,66 @@
                 }
             }'>
                 <div class="swiper-wrapper">
+                    @foreach ($get_latest_event as $key => $items)
+                        <div style="position: relative; max-height:100vh;  " class="swiper-slide">
+                            <div class="main-slider__img">
+                                <img class="w-full h-full" style="height: 100%; width:100%"
+                                    src="{{ asset($items->slider_image) }}" alt="">
+                            </div>
 
-                    <div class="swiper-slide">
-                        <div class="main-slider__img">
-                            <img src="{{ asset('frontend-assets/assets/images/resources/main-slider-img-1-1.jpg') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__shpae-1">
-                            <!-- <img src="assets/images/shapes/main-slider-shape-1.png" alt=""> -->
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-shape-1.png') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__shpae-2">
-                            <!-- <img src="assets/images/shapes/main-slider-shape-2.png" alt=""> -->
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-shape-2.png') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__start-1">
-                            <!-- <img src="assets/images/shapes/main-slider-star-1.png" alt=""> -->
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-star-1.png') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__start-2 zoominout">
-                            <!-- <img src="assets/images/shapes/main-slider-star-2.png" alt=""> -->
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-star-2.png') }}"
-                                alt="">
+                            <div class="main-slider__content">
 
-                        </div>
-                        <div class="main-slider__start-3">
-                            <!-- <img src="assets/images/shapes/main-slider-star-3.png" alt=""> -->
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-star-3.png') }}"
-                                alt="">
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="main-slider__content">
-                                        <p class="main-slider__sub-title">Music fastival</p>
-                                        <h2 class="main-slider__title">Discover a World <br> <span>of
-                                                Celebration</span>
-                                        </h2>
-                                        <p class="main-slider__text">As an AI language model, I don't have personal
-                                            opinions or points of view. However, I <br> can tell you that design is a
-                                            multifaceted field that enco various</p>
-                                        <ul class="list-unstyled main-slider__address">
-                                            <li>
+                                <div>
+                                    <p class="main-slider__sub-title">Music fastival</p>
+
+
+                                    <h3 class="main-slider__title icon-pin">
+                                        {!! \Illuminate\Support\Str::limit($items->title, 100, '') !!}
+                                    </h3>
+                                    <p class="main-slider__text">
+                                        {{ $items->short_description }}
+                                    </p>
+                                    <ul class="list-unstyled main-slider__address">
+                                        <li>
+                                            <div class="icon">
+                                                <span class="icon-pin"><i class="fa-solid fa-location-dot"></i></span>
+                                            </div>
+                                            <div class="text">
+                                                <p>{{ $items->event_address }}</p>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="icon">
+                                                <span class="icon-clock"></span>
+                                            </div>
+                                            <div class="text d-flex gap-2 "
+                                                style="align-items: center; justify-content:center;  gap:4px;">
                                                 <div class="icon">
-                                                    <span class="icon-pin"></span>
+                                                    <span class="icon-clock"><i
+                                                            class="fa-regular fa-clock"></i></span>
                                                 </div>
-                                                <div class="text">
-                                                    <p>Mirpur 01 Road N 12 Dhaka Bangladesh</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="icon">
-                                                    <span class="icon-clock"></span>
-                                                </div>
-                                                <div class="text">
-                                                    <p>10 Am To 10 Pm 20 April 2024</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="main-slider__btn-box">
-                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase
-                                                Ticket
-                                                <span class="icon-arrow-right"></span> </a>
-                                        </div>
+                                                <p>
+                                                    @if ($items->event_start_time)
+                                                        {{ \Carbon\Carbon::parse($items->event_start_time)->format('h:i A') }}
+                                                    @endif
+                                                    @if ($items->event_end_time)
+                                                        {{ 'To ' . \Carbon\Carbon::parse($items->event_end_time)->format('h:i A') }}
+                                                    @endif
+                                                </p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="main-slider__btn-box">
+                                        <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase
+                                            Ticket
+                                            <span class="icon-arrow-right"></span> </a>
                                     </div>
                                 </div>
+
+
                             </div>
                         </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="main-slider__img">
-                            <!-- <img src="assets/images/resources/main-slider-img-1-2.jpg" alt=""> -->
-                            <img src="{{ asset('frontend-assets/assets/images/resources/main-slider-img-1-2.jpg') }}"
-                                alt="">
-
-                        </div>
-                        <div class="main-slider__shpae-1">
-                            <!-- <img src="assets/images/shapes/main-slider-shape-1.png" alt=""> -->
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-shape-1.png') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__shpae-2">
-
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-shape-2.png') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__start-1">
-
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-star-1.png') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__start-2 zoominout">
-
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-star-2.png') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__start-3">
-
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-star-3.png') }}"
-                                alt="">
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="main-slider__content">
-                                        <p class="main-slider__sub-title">Music fastival</p>
-                                        <h2 class="main-slider__title">Discover a World <br> <span>of
-                                                Celebration</span>
-                                        </h2>
-                                        <p class="main-slider__text">As an AI language model, I don't have personal
-                                            opinions or points of view. However, I <br> can tell you that design is a
-                                            multifaceted field that enco various</p>
-                                        <ul class="list-unstyled main-slider__address">
-                                            <li>
-                                                <div class="icon">
-                                                    <span class="icon-pin"></span>
-                                                </div>
-                                                <div class="text">
-                                                    <p>Mirpur 01 Road N 12 Dhaka Bangladesh</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="icon">
-                                                    <span class="icon-clock"></span>
-                                                </div>
-                                                <div class="text">
-                                                    <p>10 Am To 10 Pm 20 April 2024</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="main-slider__btn-box">
-                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase
-                                                Ticket
-                                                <span class="icon-arrow-right"></span> </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="main-slider__img">
-
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-img-1-3.jpg') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__shpae-1">
-
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-shape-1.png') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__shpae-2">
-
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-shape-2.png') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__start-1">
-
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-star-1.png') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__start-2 zoominout">
-
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-star-2.png') }}"
-                                alt="">
-                        </div>
-                        <div class="main-slider__start-3">
-                            <img src="{{ asset('frontend-assets/assets/images/shapes/main-slider-star-3.png') }}"
-                                alt="">
-                        </div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <div class="main-slider__content">
-                                        <p class="main-slider__sub-title">Music fastival</p>
-                                        <h2 class="main-slider__title">Discover a World <br> <span>of
-                                                Celebration</span>
-                                        </h2>
-                                        <p class="main-slider__text">As an AI language model, I don't have personal
-                                            opinions or points of view. However, I <br> can tell you that design is a
-                                            multifaceted field that enco various</p>
-                                        <ul class="list-unstyled main-slider__address">
-                                            <li>
-                                                <div class="icon">
-                                                    <span class="icon-pin"></span>
-                                                </div>
-                                                <div class="text">
-                                                    <p>Mirpur 01 Road N 12 Dhaka Bangladesh</p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="icon">
-                                                    <span class="icon-clock"></span>
-                                                </div>
-                                                <div class="text">
-                                                    <p>10 Am To 10 Pm 20 April 2024</p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="main-slider__btn-box">
-                                            <a href="/event/details/12" class="main-slider__btn thm-btn">Purchase
-                                                Ticket
-                                                <span class="icon-arrow-right"></span> </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    @endforeach
 
                 </div>
 
@@ -387,7 +233,7 @@
 
         <!-- Sliding Text One Start -->
 
-
+        {{-- upcoming events --}}
 
         <section class="blog-one">
             <div class="container">
@@ -405,122 +251,82 @@
                 <div class="blog-one__bottom">
                     <div class="row">
                         <!--Blog One Single Start-->
-                        <div class="col-xl-4 col-lg-4 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
-                            <div class="blog-one__single">
-                                <div class="blog-one__img">
+                        @foreach ($get_upcoming_event as $key => $items)
+                            <div class="col-xl-4 col-lg-4 col-md-6 wow fadeInLeft" data-wow-delay="100ms">
+                                <div class="blog-one__single">
+                                    <div class="blog-one__img">
 
-                                    <img src="{{ asset('frontend-assets/assets/images/blog/blog-1-1.jpg') }}"
-                                        alt="">
-                                    <div class="blog-one__hover">
-                                        <a href="/event/details/12">
-                                            <div class="blog-one__hover-icon-1">
-                                                <span class="blog-one__hover-icon-2"></span>
-                                            </div>
-                                        </a>
+                                        <img src="{{ asset($items->slider_image) }}" alt="">
+                                        <div class="blog-one__hover">
+                                            <a href="/event/details/{{ $items->id }}">
+                                                <div class="blog-one__hover-icon-1">
+                                                    <span class="blog-one__hover-icon-2"></span>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="blog-one__content">
-                                    <ul class="blog-one__meta list-unstyled">
-                                        <li>
-                                            <a href="#"><span class="icon-user"></span>By admin</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><span class="icon-calendar"></span>October 19, 2022</a>
-                                        </li>
-                                    </ul>
-                                    <h3 class="blog-one__title"><a href="/event/details/12">Join the Festivi Celebrate
-                                            <br> Special Moments</a></h3>
-                                    <div class="blog-one__btn-box-two">
-                                        <a href="/event/details/12" class="blog-one__btn-2 thm-btn">Read More<span
-                                                class="fa fa-arrow-right"></span>
-                                        </a>
+                                    <div class="blog-one__content">
+                                        <ul class="blog-one__meta list-unstyled">
+                                            <li>
+                                                <a href="/event/details/{{ $items->id }}"><span
+                                                        class="icon-user"></span>
+                                                    @if ($items->event_start_time)
+                                                        {{ \Carbon\Carbon::parse($items->event_start_time)->format('h:i A') }}
+                                                    @endif
+                                                    {{-- @if ($items->event_end_time)
+                                                    {{ 'To ' . \Carbon\Carbon::parse($items->event_end_time)->format('h:i A') }}
+                                                @endif --}}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/event/details/{{ $items->id }}">
+
+
+                                                    @if ($items->event_start_date)
+                                                        {{ \Carbon\Carbon::parse($items->event_start_date)->format('d, M, Y') }}
+                                                    @endif
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <h3 class="blog-one__title"><a href="/event/details/{{ $items->id }}">
+                                                {{ $items->title }}
+                                        </h3>
+                                        <div class="blog-one__btn-box-two">
+                                            <a href="/event/details/{{ $items->id }}"
+                                                class="blog-one__btn-2 thm-btn">Read More<span
+                                                    class="fa fa-arrow-right"></span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--Blog One Single End-->
-                        <!--Blog One Single Start-->
-                        <div class="col-xl-4 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="200ms">
-                            <div class="blog-one__single">
-                                <div class="blog-one__img">
+                        @endforeach
 
-                                    <img src="{{ asset('frontend-assets/assets/images/blog/blog-1-2.jpg') }}"
-                                        alt="">
-                                    <div class="blog-one__hover">
-                                        <a href="/event/details/12">
-                                            <div class="blog-one__hover-icon-1">
-                                                <span class="blog-one__hover-icon-2"></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="blog-one__content">
-                                    <ul class="blog-one__meta list-unstyled">
-                                        <li>
-                                            <a href="#"><span class="icon-user"></span>By admin</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><span class="icon-calendar"></span>October 19, 2022</a>
-                                        </li>
-                                    </ul>
-                                    <h3 class="blog-one__title"><a href="/event/details/12">Embrace the Joyful Spirit
-                                            Discover a World</a></h3>
-                                    <div class="blog-one__btn-box-two">
-                                        <a href="/event/details/12" class="blog-one__btn-2 thm-btn">Read More<span
-                                                class="fa fa-arrow-right"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Blog One Single End-->
-                        <!--Blog One Single Start-->
-                        <div class="col-xl-4 col-lg-4 col-md-6 wow fadeInRight" data-wow-delay="300ms">
-                            <div class="blog-one__single">
-                                <div class="blog-one__img">
-
-                                    <img src="{{ asset('frontend-assets/assets/images/blog/blog-1-3.jpg') }}"
-                                        alt="">
-                                    <div class="blog-one__hover">
-                                        <a href="/event/details/12">
-                                            <div class="blog-one__hover-icon-1">
-                                                <span class="blog-one__hover-icon-2"></span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="blog-one__content">
-                                    <ul class="blog-one__meta list-unstyled">
-                                        <li>
-                                            <a href="#"><span class="icon-user"></span>By admin</a>
-                                        </li>
-                                        <li>
-                                            <a href="#"><span class="icon-calendar"></span>October 19, 2022</a>
-                                        </li>
-                                    </ul>
-                                    <h3 class="blog-one__title"><a href="/event/details/12">Where Moments Come Alive
-                                            an
-                                            Celebrate</a></h3>
-                                    <div class="blog-one__btn-box-two">
-                                        <a href="/event/details/12" class="blog-one__btn-2 thm-btn">Read More<span
-                                                class="fa fa-arrow-right"></span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--Blog One Single End-->
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="sliding-text-one mt-4">
-            <div class="sliding-text-one__wrap w-full ">
-                <h1 class="w-full py-5 fw-bold text-2xl text-center">Catagory</h1>
-                <ul class="sliding-text__list  marquee_mode">
-                    @foreach ($categories as $key => $items)
-                       <a class="events-cat" href="/events" style="">
+
+
+
+        <section class="container text-center" style="text-align: center;">
+            <h1 class="my-4 py-4 ">Categorys</h1>
+            <swiper-container 
+            class="mySwiper w-100 customize-swiper" 
+            autoplay-delay="2500"
+            slides-per-view="4"
+            space-between="25"
+            free-mode="true"
+            breakpoints='{
+                "1024": { "slidesPerView": 4, "spaceBetween": 20 },
+                "768": { "slidesPerView": 2, "spaceBetween": 15 },
+                "480": { "slidesPerView": 1, "spaceBetween": 10 }
+            }'
+        >
+            @foreach ($categories as $key => $items)
+                <swiper-slide class="p-4 rounded" style="border: 1px solid #1d1d1ddd; background:#010214dd">
+                    <a class="events-cat" href="/events">
                         <li style="cursor: pointer;">
                             <div class="catagory-card">
                                 <div class="catagory-img">
@@ -529,18 +335,14 @@
                                 <b>{{ $items->name }}</b>
                             </div>
                         </li>
-                       </a>
-                    @endforeach
-                </ul>
-            </div>
+                    </a>
+                </swiper-slide>
+            @endforeach
+        </swiper-container>
         </section>
-
-
         <!--Site Footer Start-->
         @include('frontend.layouts.footer')
         <!--Site Footer End-->
-
-
     </div>
 
     <div class="mobile-nav__wrapper">
@@ -583,6 +385,7 @@
 
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fas fa-arrow-up"></i></a>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 
     <script src="{{ asset('frontend-assets/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('frontend-assets/assets/js/bootstrap.bundle.min.js') }}"></script>

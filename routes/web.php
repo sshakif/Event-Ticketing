@@ -11,7 +11,7 @@ use Spatie\Permission\Middlewares\PermissionMiddleware;
 //Frontend Route List
 Route::get('/', [UserController::class, 'Index'])->name('index');
 Route::get('/about', [UserController::class, 'About'])->name('about');
-Route::get('/events', [UserController::class, 'Events'])->name('events');
+Route::get('/view-events', [UserController::class, 'Events'])->name('events');
 Route::get('/event/details/{id}' , [UserController::class, 'Details'])->name('details');
 Route::get('/terms-conditions' , [UserController::class, 'Terms'])->name('terms');
 Route::get('/privacy-policy' , [UserController::class, 'Privacy'])->name('privacy');
@@ -52,6 +52,7 @@ Route::middleware('admin')->group(function(){
     Route::delete('/delete_event/{id}' , [EventController::class, 'Destroy'])->name('event.delete');
     Route::get('/events/details/{id}' , [EventController::class, 'Show'])->name('event.details');
     Route::get('/events/edit/{id}' , [EventController::class, 'Edit'])->name('event.edit');
+    Route::put('/events/update/{id}' , [EventController::class, 'Update'])->name('event.update');
     // end events
 
 

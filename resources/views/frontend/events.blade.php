@@ -82,8 +82,8 @@
                                 <a href="index.html"><img src="assets/images/resources/logo-1.png"
                                         alt="" /></a>
                             </div>
-                      
-                        
+
+
                         </div>
                     </div>
                 </div>
@@ -142,7 +142,8 @@
                         <div class="filter-section  py-3">
                             <div class="d-flex align-items-center gap-4">
                                 <div class="flex filter-items " id="category-btn"><i
-                                        class="fa-solid px-1 fa-layer-group"></i><b><span class="filter-text">Category</span></b></div>
+                                        class="fa-solid px-1 fa-layer-group"></i><b><span
+                                            class="filter-text">Category</span></b></div>
                                 <div class="flex filter-items ">
                                     <div class="dropdown">
                                         <i class="fa-solid  fa-filter"></i></i><b>
@@ -176,21 +177,20 @@
                         </div>
 
 
-                        <div class="tabs-content">
+                        {{-- all events --}}
 
-
-                            <div class="tab active-tab" id="1st-day">
+                        @foreach ($all_events as $key => $items)
+                            <div class="tabs-content">
                                 <div class="schedule-one__tab-content-box">
                                     <div class="schedule-one__single">
                                         <div class="schedule-one__left">
-                                            <h3 class="schedule-one__title"><a href="/event/details/12">Events That
-                                                    Leave a <br>
-                                                    Impression</a></h3>
-                                            <p class="schedule-one__text">A personal portfolio is a curated collection
-                                                of <br> an individual's professional work</p>
+                                            <h2 class="schedule-one__title"><a href="/event/details/{{$items->id}}">
+                                                {{$items->title}}
+                                                </a></h2>
+                                            <p class="schedule-one__text py-3">{{$items->short_description}}</p>
                                         </div>
                                         <div class="schedule-one__img">
-                                            <img src="{{ asset('frontend-assets/assets/images/resources/schedule-one-1-9.jpg') }}"
+                                            <img src="{{ $items->slider_image }}"
                                                 alt="">
                                         </div>
                                         <div class="schedule-one__address-and-btn-box">
@@ -200,7 +200,10 @@
                                                         <span class="icon-clock"></span>
                                                     </div>
                                                     <div class="text">
-                                                        <p>10 Am To 10 Pm <br> 20 April 2024</p>
+                                                        <p>{{$items->event_start_time ?  \Carbon\Carbon::parse($items->event_start_time)->format('h:i A')  :"Not provided"}} To {{$items->event_end_time ? \Carbon\Carbon::parse($items->event_end_time)->format('h:i A')  : "Not provided" }} <br> 
+                                                        {{$items->event_start_date ? \Carbon\Carbon::parse($items->event_start_date)->format('d, M, Y')  :"Not provided"}} <span class="px-1">To</span> 
+                                                        {{$items->event_end_date ?  \Carbon\Carbon::parse($items->event_end_date)->format('d, M, Y')   :"Not provided"}}
+                                                        </p>
                                                     </div>
                                                 </li>
                                                 <li>
@@ -208,332 +211,19 @@
                                                         <span class="icon-pin"></span>
                                                     </div>
                                                     <div class="text">
-                                                        <p>Mirpur 01 Road N 12 Dhaka <br> Bangladesh</p>
+                                                        <p>{{$items->event_address}}</p>
                                                     </div>
                                                 </li>
                                             </ul>
                                             <div class="schedule-one__btn-box">
-                                                <a href="/event/details/12" class="schedule-one__btn thm-btn">Buy
-                                                    Ticket<span class="icon-arrow-right"></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="schedule-one__single">
-                                        <div class="schedule-one__left">
-                                            <h3 class="schedule-one__title"><a href="/event/details/12">Sparkle &
-                                                    Shine
-                                                    on <br>
-                                                    Celebrations
-                                                </a></h3>
-                                            <p class="schedule-one__text">A personal portfolio is a curated collection
-                                                of <br> an individual's professional work</p>
-                                        </div>
-                                        <div class="schedule-one__img">
-                                            <img src="{{ asset('frontend-assets/assets/images/resources/schedule-one-1-9.jpg') }}"
-                                                alt="">
-                                        </div>
-                                        <div class="schedule-one__address-and-btn-box">
-                                            <ul class="list-unstyled schedule-one__address">
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-clock"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>10 Am To 10 Pm <br> 20 April 2024</p>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-pin"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>Mirpur 01 Road N 12 Dhaka <br> Bangladesh</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="schedule-one__btn-box">
-                                                <a href="/event/details/12" class="schedule-one__btn thm-btn">Buy
-                                                    Ticket<span class="icon-arrow-right"></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="schedule-one__single">
-                                        <div class="schedule-one__left">
-                                            <h3 class="schedule-one__title"><a href="/event/details/12">Sparkle &
-                                                    Shine
-                                                    <br> Events
-                                                </a></h3>
-                                            <p class="schedule-one__text">A personal portfolio is a curated collection
-                                                of <br> an individual's professional work</p>
-                                        </div>
-                                        <div class="schedule-one__img">
-                                            <img src="{{ asset('frontend-assets/assets/images/resources/schedule-one-1-9.jpg') }}"
-                                                alt="">
-                                        </div>
-                                        <div class="schedule-one__address-and-btn-box">
-                                            <ul class="list-unstyled schedule-one__address">
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-clock"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>10 Am To 10 Pm <br> 20 April 2024</p>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-pin"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>Mirpur 01 Road N 12 Dhaka <br> Bangladesh</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="schedule-one__btn-box">
-                                                <a href="/event/details/12" class="schedule-one__btn thm-btn">Buy
+                                                <a href="/event/details/{{$items->id}}" class="schedule-one__btn thm-btn">Buy
                                                     Ticket<span class="icon-arrow-right"></span> </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!--tab-->
-                            <div class="tab " id="2nd-day">
-                                <div class="schedule-one__tab-content-box">
-                                    <div class="schedule-one__single">
-                                        <div class="schedule-one__left">
-                                            <h3 class="schedule-one__title"><a href="event-details.html">Events That
-                                                    Leave a <br>
-                                                    Impression</a></h3>
-                                            <p class="schedule-one__text">A personal portfolio is a curated collection
-                                                of <br> an individual's professional work</p>
-                                        </div>
-                                        <div class="schedule-one__img">
-                                            <img src="{{ asset('frontend-assets/assets/images/resources/schedule-one-1-9.jpg') }}"
-                                                alt="">
-                                        </div>
-                                        <div class="schedule-one__address-and-btn-box">
-                                            <ul class="list-unstyled schedule-one__address">
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-clock"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>10 Am To 10 Pm <br> 20 April 2024</p>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-pin"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>Mirpur 01 Road N 12 Dhaka <br> Bangladesh</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="schedule-one__btn-box">
-                                                <a href="/event/details/12" class="schedule-one__btn thm-btn">Buy
-                                                    Ticket<span class="icon-arrow-right"></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="schedule-one__single">
-                                        <div class="schedule-one__left">
-                                            <h3 class="schedule-one__title"><a href="event-details.html">Sparkle &
-                                                    Shine
-                                                    on <br>
-                                                    Celebrations
-                                                </a></h3>
-                                            <p class="schedule-one__text">A personal portfolio is a curated collection
-                                                of <br> an individual's professional work</p>
-                                        </div>
-                                        <div class="schedule-one__img">
-                                            <img src="{{ asset('frontend-assets/assets/images/resources/schedule-one-1-9.jpg') }}"
-                                                alt="">
-                                        </div>
-                                        <div class="schedule-one__address-and-btn-box">
-                                            <ul class="list-unstyled schedule-one__address">
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-clock"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>10 Am To 10 Pm <br> 20 April 2024</p>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-pin"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>Mirpur 01 Road N 12 Dhaka <br> Bangladesh</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="schedule-one__btn-box">
-                                                <a href="contact.html" class="schedule-one__btn thm-btn">Buy
-                                                    Ticket<span class="icon-arrow-right"></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="schedule-one__single">
-                                        <div class="schedule-one__left">
-                                            <h3 class="schedule-one__title"><a href="event-details.html">Sparkle &
-                                                    Shine
-                                                    <br> Events
-                                                </a></h3>
-                                            <p class="schedule-one__text">A personal portfolio is a curated collection
-                                                of <br> an individual's professional work</p>
-                                        </div>
-                                        <div class="schedule-one__img">
-                                            <img src="{{ asset('frontend-assets/assets/images/resources/schedule-one-1-9.jpg') }}"
-                                                alt="">
-                                        </div>
-                                        <div class="schedule-one__address-and-btn-box">
-                                            <ul class="list-unstyled schedule-one__address">
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-clock"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>10 Am To 10 Pm <br> 20 April 2024</p>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-pin"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>Mirpur 01 Road N 12 Dhaka <br> Bangladesh</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="schedule-one__btn-box">
-                                                <a href="/event/details/12" class="schedule-one__btn thm-btn">Buy
-                                                    Ticket<span class="icon-arrow-right"></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--tab-->
-                            <div class="tab " id="3rd-day">
-                                <div class="schedule-one__tab-content-box">
-                                    <div class="schedule-one__single">
-                                        <div class="schedule-one__left">
-                                            <h3 class="schedule-one__title"><a href="event-details.html">Events That
-                                                    Leave a <br>
-                                                    Impression</a></h3>
-                                            <p class="schedule-one__text">A personal portfolio is a curated collection
-                                                of <br> an individual's professional work</p>
-                                        </div>
-                                        <div class="schedule-one__img">
-                                            <img src="assets/images/resources/schedule-one-1-7.jpg" alt="">
-                                        </div>
-                                        <div class="schedule-one__address-and-btn-box">
-                                            <ul class="list-unstyled schedule-one__address">
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-clock"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>10 Am To 10 Pm <br> 20 April 2024</p>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-pin"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>Mirpur 01 Road N 12 Dhaka <br> Bangladesh</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="schedule-one__btn-box">
-                                                <a href="/events/details/12" class="schedule-one__btn thm-btn">Buy
-                                                    Ticket<span class="icon-arrow-right"></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="schedule-one__single">
-                                        <div class="schedule-one__left">
-                                            <h3 class="schedule-one__title"><a href="event-details.html">Sparkle &
-                                                    Shine
-                                                    on <br>
-                                                    Celebrations
-                                                </a></h3>
-                                            <p class="schedule-one__text">A personal portfolio is a curated collection
-                                                of <br> an individual's professional work</p>
-                                        </div>
-                                        <div class="schedule-one__img">
-                                            <img src="assets/images/resources/schedule-one-1-8.jpg" alt="">
-                                        </div>
-                                        <div class="schedule-one__address-and-btn-box">
-                                            <ul class="list-unstyled schedule-one__address">
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-clock"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>10 Am To 10 Pm <br> 20 April 2024</p>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-pin"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>Mirpur 01 Road N 12 Dhaka <br> Bangladesh</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="schedule-one__btn-box">
-                                                <a href="/events/details/12" class="schedule-one__btn thm-btn">Buy
-                                                    Ticket<span class="icon-arrow-right"></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="schedule-one__single">
-                                        <div class="schedule-one__left">
-                                            <h3 class="schedule-one__title"><a href="event-details.html">Sparkle &
-                                                    Shine
-                                                    <br> Events
-                                                </a></h3>
-                                            <p class="schedule-one__text">A personal portfolio is a curated collection
-                                                of <br> an individual's professional work</p>
-                                        </div>
-                                        <div class="schedule-one__img">
-                                            <img src="{{ asset('frontend-assets/assets/images/resources/schedule-one-1-9.jpg') }}"
-                                                alt="">
-                                        </div>
-                                        <div class="schedule-one__address-and-btn-box">
-                                            <ul class="list-unstyled schedule-one__address">
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-clock"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>10 Am To 10 Pm <br> 20 April 2024</p>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="icon">
-                                                        <span class="icon-pin"></span>
-                                                    </div>
-                                                    <div class="text">
-                                                        <p>Mirpur 01 Road N 12 Dhaka <br> Bangladesh</p>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            <div class="schedule-one__btn-box">
-                                                <a href="/details/23" class="schedule-one__btn thm-btn">Buy
-                                                    Ticket<span class="icon-arrow-right"></span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -614,7 +304,7 @@
 
                         <b class="py-4">Alan walker</b>
                     </div>
-                    
+
                     <div>
                         <img src="{{ asset('frontend-assets/assets/images/resources/schedule-one-1-9.jpg') }}" />
 

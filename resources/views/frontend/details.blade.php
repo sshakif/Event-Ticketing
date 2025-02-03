@@ -5,7 +5,7 @@
 <!-- Mirrored from unicktheme.com/2024/eventflow/main-html/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 22 Jan 2025 06:17:41 GMT -->
 
 <head>
-  
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home One || eventflow || eventflow HTML 5 Template </title>
@@ -19,7 +19,7 @@
     <!-- fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-   
+
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;display=swap"
         rel="stylesheet">
@@ -80,7 +80,7 @@
     <link rel="stylesheet" href="{{ asset('frontend-assets/assets/css/eventflow-responsive.css') }}" type="text/css"
         media="all" />
 
-       
+
 </head>
 
 <body class="body-bg-color-1">
@@ -106,7 +106,7 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut
                                     labore et magna aliqua.</p>
                             </div>
-                          
+
                         </div>
                     </div>
                 </div>
@@ -132,172 +132,191 @@
                 <div class="row">
                     <div class="col-xl-8 col-lg-7">
                         <div class="blog-details__left">
-                            <div class="blog-details__img-1">
-                                <img src="{{ asset('frontend-assets/assets/images/blog/blog-details-img-1.jpg') }}" alt="">
-                                <div class="blog-details__date">
-                                    <p>22 jan</p>
-                                </div>
-                            </div>
-                            <div class="blog-details__content">
-                                <h3 class="blog-details__title-1">Celebrate Life Celebrate with Us</h3>
-                                <p class="blog-details__text-1">Real estate is a lucrative industry that involves the
-                                    buying selling and renting properties It encompasses residential commercial and
-                                    industrial designsin properties. Real estate agents play a crucial</p>
-                                <p class="blog-details__text-2">Real estate is a lucrative industry that involves the
-                                    buying, selling, and wasi renting properties. It encom residential, commercial, and
-                                    industrial properties is here Real estate is a lucrative industry that involves the
-                                    buying, selling, and wasi renting properties. It encompasses residential, commercial
-                                </p>
-                                <div class="blog-details__quote-box">
-                                    <div class="blog-details__quote-icon">
-                                        <span class="icon-quote"></span>
-                                    </div>
-                                    <h3 class="blog-details__quote-box-client-name">Mark wood</h3>
-                                    <p class="blog-details__quote-box-sub-title">CEO</p>
-                                    <p class="blog-details__quote-box-text">Real estate is a lucrative industry that
-                                        involves the buying selling and renting pr encompasses residential commercial
-                                        and was industrial properties. Real estate agents play a crucial role in
-                                        facilitating at transactions and helping commercial Real estate is a lucrative
+                            <div class="blog-details__img-1 relative">
+                                @if ($items->slider_image)
+                                    <swiper-container class="mySwiper" pagination="true" autoplay-delay="3000"
+                                        navigation="true">
+
+                                        @if ($items->slider_image)
+                                            <swiper-slide>
+                                                <img class="swiper-img" src="{{ asset($items->slider_image) }}"
+                                                    alt="">
+                                            </swiper-slide>
+                                        @endif
+
+                                        @if ($items->banner_image)
+                                            <swiper-slide>
+                                                <img class="swiper-img" src="{{ asset($items->banner_image) }}"
+                                                    alt="">
+                                            </swiper-slide>
+                                        @endif
+
+                                        @if ($items->banner_image2)
+                                            <swiper-slide>
+                                                <img class="swiper-img" src="{{ asset($items->banner_image2) }}"
+                                                    alt="">
+                                            </swiper-slide>
+                                        @endif
+
+                                        @if ($items->banner_image3)
+                                            <swiper-slide>
+                                                <img class="swiper-img" src="{{ asset($items->banner_image3) }}"
+                                                    alt="">
+                                            </swiper-slide>
+                                        @endif
+                                    </swiper-container>
+                                @endif
+
+
+
+
+                                <div class="blog-details__date" style="z-index: 55">
+                                    <p>
+                                        {{ \Carbon\Carbon::parse($items->event_start_date)->format('m  M') }}
                                     </p>
                                 </div>
-                                <h3 class="blog-details__title-2">Your Event Our Expertise</h3>
-                                <p class="blog-details__text-3">Aliquam eros justo, posuere loborti viverra laoreet
-                                    matti ullamcorper design posuere viverra .Aliquam an eros justo, posuere lobortis,
-                                    viverra laoreet augues mattis fermentum ullamcorper </p>
-                                <div class="blog-details__points-box">
-                                    <ul class="blog-details__points list-unstyled">
-                                        <li>
-                                            <div class="icon">
-                                                <span class="icon-double-angle"></span>
-                                            </div>
-                                            <p>Creating Memories, One Event at a Time</p>
-                                        </li>
-                                        <li>
-                                            <div class="icon">
-                                                <span class="icon-double-angle"></span>
-                                            </div>
-                                            <p>Celebrate in Style, Celebrate with Class</p>
-                                        </li>
-                                    </ul>
-                                    <ul class="blog-details__points list-unstyled">
-                                        <li>
-                                            <div class="icon">
-                                                <span class="icon-double-angle"></span>
-                                            </div>
-                                            <p>Where Events Come to Life</p>
-                                        </li>
-                                        <li>
-                                            <div class="icon">
-                                                <span class="icon-double-angle"></span>
-                                            </div>
-                                            <p>Making Your Event Dreams Come True</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <p class="blog-details__text-4">A personal portfolio is a collection of work samples,
-                                    projects, and achievements that showca individual skills and expertise in a
-                                    particular field. It serves as a professional showcase to attract</p>
-                                <div class="blog-details__img-box">
-                                    <div class="row">
-                                        <div class="col-xl-6">
-                                            <div class="blog-details__img-box-img-1">
-                                                <img src="assets/images/blog/blog-details-img-box-img-1.jpg" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-6">
-                                            <div class="blog-details__img-box-img-1">
-                                                <img src="assets/images/blog/blog-details-img-box-img-2.jpg" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                                <div class="blog-details__keyword-and-social">
-                                    <div class="blog-details__keyword-box">
-                                        <span>Keyword:</span>
-                                        <div class="blog-details__keyword">
-                                            <a href="#">Event Prodigy</a>
-                                            <a href="#">Event Management</a>
-                                        </div>
-                                    </div>
-                                    <div class="blog-details__social">
-                                        <a href="#"><span class="icon-facebook"></span></a>
-                                        <a href="#"><span class="icon-fi"></span></a>
-                                        <a href="#"><span class="icon-instagram"></span></a>
-                                    </div>
-                                </div>
-                           
                             </div>
-                           
+
+
+                            <div class="blog-details__content">
+                                <h3 class="blog-details__title-1">{{ $items->title }}</h3>
+                                <p class="blog-details__text-1">
+                                    {{ $items->short_description }}
+                                </p>
+                                <p class="blog-details__text-2">
+                                    {{ strip_tags($items->description) }}
+                                </p>
+                          
+                    
+
+                            </div>
+
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="sidebar ">
                             <div class="sidebar__single sidebar__search price-view">
-                                <div class="d-flex w-full price-section justify-content-between"><h3 class="sidebar__title">Ticket Price</h3> <b class="price-number">$23</b></div>
-                                 <div class="ticket-view">
-                                    <div class="img">
-                                        <img src="{{ asset('frontend-assets/assets/images/blog/blog-details-img-1.jpg') }}" alt="">
+                                <div class="d-flex w-full price-section justify-content-between">
+                                    <h3 class="sidebar__title">Ticket Price</h3> <b
+                                        class="price-number">${{ $items->ticket_price }}</b>
+                                </div>
+                                <div class="ticket-view">                  
+                                    <div class="py-2 px-2 rounded w-100  " style="border: 1px solid #181818">
+                                        <div class="py-2 px-2 rounded w-100  " style="border: 1px solid #181818">
+                                            <table class="  w-100 " style="background:none;">
+                                                <tr class="text-xs">
+                                                    <th>Start Date</th>
+                                                    <td>:</td>
+                                                    <td class="px-4">
+                                                        @if ($items->event_start_date)
+                                                            {{ \Carbon\Carbon::parse($items->event_start_date)->format('d, M, Y') }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="text-xs">
+                                                    <th>Start Time</th>
+                                                    <td>:</td>
+                                                    <td class="px-4">
+                                                        @if ($items->event_start_time)
+                                                            {{ \Carbon\Carbon::parse($items->event_start_time)->format('h:i A') }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+
+
+                                            </table>
+                                        </div>
+
+                                        <div class="py-2 px-2 rounded w-100 mt-2 " style="border: 1px solid #181818">
+                                            <table class="  w-100 " style="background:none;">
+                                                <tr class="text-xs">
+                                                    <th>End Date</th>
+                                                    <td>:</td>
+                                                    <td class="px-4">
+                                                        @if ($items->event_start_date)
+                                                            {{ \Carbon\Carbon::parse($items->event_end_date)->format('d, M, Y') }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+
+                                                <tr class="text-xs">
+                                                    <th>End Time</th>
+                                                    <td>:</td>
+                                                    <td class="px-4">
+                                                        @if ($items->event_start_time)
+                                                            {{ \Carbon\Carbon::parse($items->event_end_time)->format('h:i A') }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+
+
+                                            </table>
+                                        </div>
                                     </div>
 
-                                    <span style="font-size: 19px; font-weight:bold;">The person you are trying to reach is not in thank you!</span>
-                                       
-                                    
-                                 </div>
-
-                              <div class="total">
-                                <h6>Total Cost</h6>
-
-                                <div class="d-flex mt-2 total-bar w-full justify-content-between">
-                                  <b id="price-bar">$45</b>
-                                  <div class="px-2 total-inc py-1 d-flex align-items-center">
-                                   <button class="min">-</button>
-                                   <h5 id="count-display" class="count-display"></h5>
-                                   <button class="plus">+</button>
-                                  </div>
                                 </div>
 
-                                <form class="contact-form-validated contact-one__form" action=""
-                                method="post" novalidate="novalidate">
-                                <div class="row">
-                                    <div class="">
-                                        <div class="contact-one__input-box">
-                                           <label for="">Name</label>
-                                            <input type="text" name="name" placeholder="Your Name" required="">
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <div class="contact-one__input-box">
-                                            <label for="">Email</label>
-                                            <input type="email" name="email" placeholder="Type email" required="">
-                                        </div>
-                                    </div>
-                                    <div class="">
-                                        <div class="contact-one__input-box">
-                                            <label for="">Phone Number</label>
-                                            <input type="text" name="Phone" placeholder="Type to phone number" required="">
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="" style="margin-top: 7px;" >
-                                        <div style="display: flex; align-items-center gap-3px;" class="contact-one__input-box">
+                                <div class="total">
+                                    <h6>Total Cost</h6>
 
-                                        <input style="font-size:12px; border:none; outline:none;" type="checkbox" > <span>I agree with terms and conditions</span>
+                                    <div class="d-flex mt-2 total-bar w-full justify-content-between">
+                                        <b id="price-bar">
+                                            {{-- price --}}
+                                        </b>
+                                        <div class="px-2 total-inc py-1 d-flex align-items-center">
+                                            <button class="min">-</button>
+                                            <h5 id="count-display" class="count-display"></h5>
+                                            <button class="plus">+</button>
                                         </div>
                                     </div>
-                                  
+
+                                    <form class="contact-form-validated contact-one__form" action=""
+                                        method="post" novalidate="novalidate">
+                                        <div class="row">
+                                            <div class="">
+                                                <div class="contact-one__input-box">
+                                                    <label for="">Name</label>
+                                                    <input type="text" name="name" placeholder="Your Name"
+                                                        required="">
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class="contact-one__input-box">
+                                                    <label for="">Email</label>
+                                                    <input type="email" name="email" placeholder="Type email"
+                                                        required="">
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <div class="contact-one__input-box">
+                                                    <label for="">Phone Number</label>
+                                                    <input type="text" name="Phone"
+                                                        placeholder="Type to phone number" required="">
+                                                </div>
+                                            </div>
+
+                                            <div class="" style="margin-top: 7px;">
+                                                <div style="display: flex; align-items-center gap-3px;"
+                                                    class="contact-one__input-box">
+
+                                                    <input style="font-size:12px; border:none; outline:none;"
+                                                        type="checkbox"> <span>I agree with terms and conditions</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
                                 </div>
-                            </form>
-                              </div>
- 
 
-                         <div class="pay-section">
-                           Pay Now
-                         </div>
+
+                                <div class="pay-section">
+                                    Pay Now
+                                </div>
                             </div>
-                           
-                        
-                           
+
+
+
                         </div>
                     </div>
                 </div>
@@ -354,8 +373,33 @@
     <!-- /.mobile-nav__wrapper -->
 
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top"><i class="fas fa-arrow-up"></i></a>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
+    <script>
+        let Incriment = document.querySelector('.plus');
+        let Decrement = document.querySelector('.min');
+        let Count = 0;
 
- 
+        if (Count < 1) {
+            document.getElementById('price-bar').innerHTML = Count;
+        }
+        document.querySelector('#count-display').innerHTML = Count;
+        Incriment.addEventListener('click', () => {
+            Count += 1;
+            document.getElementById('price-bar').innerHTML = Count * {{ $items->ticket_price }}
+            document.querySelector('.count-display').innerHTML = Count;
+
+        });
+        Decrement.addEventListener('click', () => {
+            if (Count > 0) {
+                Count -= 1;
+                document.getElementById('price-bar').innerHTML = Count * {{ $items->ticket_price }}
+                document.querySelector('.count-display').innerHTML = Count;
+
+            }
+
+        });
+    </script>
+
     <script src="{{ asset('frontend-assets/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('frontend-assets/assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('frontend-assets/assets/js/jarallax.min.js') }}"></script>

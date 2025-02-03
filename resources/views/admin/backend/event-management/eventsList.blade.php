@@ -31,8 +31,8 @@
             <!-- End page title -->
 
             <div class="row">
-                <div class="col-12">
-                    <table id="datatable" class="table table-bordered dt-responsive nowrap w-100">
+                <div class="col-12" style="overflow-x: scroll">
+                    <table id="datatable"  class="table table-bordered dt-responsive nowrap">
                         <thead>
                             <tr>
                                 <th scope="col">Id</th>

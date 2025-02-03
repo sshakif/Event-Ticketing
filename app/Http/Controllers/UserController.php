@@ -17,6 +17,7 @@ use App\Models\Testimonial;
 use App\Models\Service;
 use App\Models\About;
 use App\Models\Category;
+use App\Models\Event;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -27,10 +28,10 @@ class UserController extends Controller
 {
 
     public function index()
-    {
+    {   $get_upcoming_event = Event::where('status' , true)->limit(3)->orderBy('created_at' , 'desc')->get();
+        $get_latest_event = Event::where('status' , true)->limit(10)->orderBy('created_at' , 'desc')->get();
         $categories = Category::orderBy('created_at', 'desc')->get();
-        
-        return view('frontend.index' , compact('categories'));
+        return view('frontend.index' , compact('categories' , 'get_latest_event' , 'get_upcoming_event'));
     }
 
     public function About(){
@@ -38,11 +39,13 @@ class UserController extends Controller
     }
 
     public function Events(){
-        return view('frontend.events');
+        $all_events  =Event::where('status' , true)->orderBy('created_at', 'desc')->get();
+        return view('frontend.events' ,compact('all_events') );
     }
 
-    public function Details(){
-        return view('frontend.details');
+    public function Details($id){
+        $items = Event::find($id);
+        return view('frontend.details' , compact('items'));
     }
 
     public function Terms(){

@@ -14,7 +14,7 @@
                         
                         </div>
                         <div class="page-title-right">
-                            <a href="/"> <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#AddModal"><i class="fa-solid fa-earth-americas"></i> View
+                            <a href="/event/details/{{$items->id}}"> <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#AddModal"><i class="fa-solid fa-earth-americas"></i> View
                             </button></a>
                         </div>
                     </div>

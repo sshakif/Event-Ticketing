@@ -19,7 +19,7 @@
 
                         </li>
                         <li class="{{request()->is('events') ? 'active' : '' }}">
-                            <a href="/events">Events</a>
+                            <a href="/view-events">Events</a>
 
                         </li>
                         <li class="{{request()->is('about') ? 'active' : '' }}">
@@ -32,7 +32,7 @@
                 <div class="main-menu__right">
 
                     <div class="main-menu__btn-box">
-                        <a href="/events" class="main-menu__btn thm-btn">Buy Ticket <span
+                        <a href="/view-events" class="main-menu__btn thm-btn">Buy Ticket <span
                                 class="icon-arrow-right"></span> </a>
                     </div>
                 </div>
