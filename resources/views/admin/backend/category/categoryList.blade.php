@@ -53,7 +53,7 @@
                                             $note = strip_tags($items->name); // Remove HTML tags from the text
                                         @endphp
 
-                                        {!! \Illuminate\Support\Str::limit($note, 15, '...') !!}
+                                        {!! \Illuminate\Support\Str::limit($note, 50, '...') !!}
 
                                         @if (strlen($note) > 50)
                                             <a data-bs-toggle="modal" data-bs-target="#ViewNote{{ $key }}"

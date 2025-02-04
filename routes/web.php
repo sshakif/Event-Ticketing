@@ -21,6 +21,7 @@ Route::get('/event/details/{id}' , [UserController::class, 'Details'])->name('de
 Route::post('/event/ticket-request' , [UserController::class, 'Request_ticket'])->name('ticket.request');
 
 
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
@@ -57,6 +58,12 @@ Route::middleware('admin')->group(function(){
     Route::get('/events/edit/{id}' , [EventController::class, 'Edit'])->name('event.edit');
     Route::put('/events/update/{id}' , [EventController::class, 'Update'])->name('event.update');
     // end events
+
+    // For ticket
+    Route::get('/ticket-request', [EventController::class, 'Ticket'])->name('events.ticket_request');
+    Route::get('/ticket-request/approve/{id}', [EventController::class, 'Aprrove'])->name('events.approve');
+    Route::get('/ticket-request/discard/{id}', [EventController::class, 'Discard'])->name('events.discard');
+    // end ticket
 
 
     // role and permission

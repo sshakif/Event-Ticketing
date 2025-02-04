@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Event;
 use App\Models\EventBookingRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 
 class UserController extends Controller
 {
@@ -67,7 +68,7 @@ class UserController extends Controller
         $request->validate([
             'name'=>'required',           
             'participant'=>'required',
-            'email'=>'required',
+            'email'=>'required | email| unique:users',
             'phone'=>'required',
          
         ]);
@@ -96,7 +97,7 @@ class UserController extends Controller
             $Ticke_Request->save();
         }
        
-        return redirect()->route('events')->with('success', 'Category added successfully!');
+        return Redirect::back()->with('success', 'Ticket request successfully!');
     }
 
 }

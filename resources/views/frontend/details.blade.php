@@ -196,11 +196,18 @@
                     <div class="col-xl-4 col-lg-5">
                         <div class="sidebar ">
                             <div class="sidebar__single sidebar__search price-view">
+                                @if (session('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
                                 <div class="d-flex w-full price-section justify-content-between">
                                     <h3 class="sidebar__title">Ticket Price</h3> <b
                                         class="price-number">${{ $items->ticket_price }}</b>
                                 </div>
                                 <div class="ticket-view">
+                                
                                     <div class="py-2 px-2 rounded w-100  " style="border: 1px solid #181818">
                                         <div class="py-2 px-2 rounded w-100  " style="border: 1px solid #181818">
                                             <table class="  w-100 " style="background:none;">
@@ -230,12 +237,7 @@
 
                                         <div class="py-2 px-2 rounded w-100 mt-2 " style="border: 1px solid #181818">
 
-                                            @if (session('success'))
-                                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                {{ session('success') }}
-                                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                            </div>
-                                        @endif
+                                          
                                             <table class="  w-100 " style="background:none;">
                                                 <tr class="text-xs">
                                                     <th>End Date</th>
@@ -279,7 +281,7 @@
 
                                     </div>
                                     <span class="text-danger">
-                                        @error('tickets')
+                                        @error('participant')
                                             {{ $message }}
                                         @enderror
                                     </span>
@@ -337,7 +339,7 @@
                                                 <div style="display: flex; align-items-center gap-3px;"
                                                     class="contact-one__input-box">
 
-                                                    <input style="font-size:12px; border:none; outline:none;"
+                                                    <input required style="font-size:12px; border:none; outline:none;"
                                                         type="checkbox"> <span>I agree with terms and conditions</span>
                                                 </div>
                                             </div>

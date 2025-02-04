@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Event;
-use App\Models\User;
+use App\Models\EventBookingRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -144,10 +144,11 @@ class EventController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function Edit($id)
-    {   $event = Event::find($id);
+    {
+        $event = Event::find($id);
         $category = Category::all();
 
-        return view('admin.backend.event-management.edit-event', compact('category' , 'event'));
+        return view('admin.backend.event-management.edit-event', compact('category', 'event'));
     }
 
     /**
@@ -166,10 +167,10 @@ class EventController extends Controller
         $ban_img3 = null;
         $slider_img = null;
         if ($request->hasFile('banner_image')) {
-            if ($event->banner_image && file_exists(public_path($event->banner_image))) {              
-                 unlink(public_path($event->banner_image));
+            if ($event->banner_image && file_exists(public_path($event->banner_image))) {
+                unlink(public_path($event->banner_image));
             }
-            $image = $request->file('banner_image');           
+            $image = $request->file('banner_image');
             $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
             if (!file_exists(public_path('upload/events'))) {
                 mkdir(public_path('upload/events'), 0777, true);
@@ -180,10 +181,10 @@ class EventController extends Controller
         }
 
         if ($request->hasFile('banner_image2')) {
-            if ($event->banner_image2 && file_exists(public_path($event->banner_image2))) {               
-                 unlink(public_path($event->banner_image2));
+            if ($event->banner_image2 && file_exists(public_path($event->banner_image2))) {
+                unlink(public_path($event->banner_image2));
             }
-            $image = $request->file('banner_image2');           
+            $image = $request->file('banner_image2');
             $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
             if (!file_exists(public_path('upload/events'))) {
                 mkdir(public_path('upload/events'), 0777, true);
@@ -194,10 +195,10 @@ class EventController extends Controller
         }
 
         if ($request->hasFile('banner_image3')) {
-            if ($event->banner_image3 && file_exists(public_path($event->banner_image3))) {               
-                 unlink(public_path($event->banner_image3));
+            if ($event->banner_image3 && file_exists(public_path($event->banner_image3))) {
+                unlink(public_path($event->banner_image3));
             }
-            $image = $request->file('banner_image3');           
+            $image = $request->file('banner_image3');
             $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
             if (!file_exists(public_path('upload/events'))) {
                 mkdir(public_path('upload/events'), 0777, true);
@@ -208,10 +209,10 @@ class EventController extends Controller
         }
 
         if ($request->hasFile('slider_image')) {
-            if ($event->slider_image && file_exists(public_path($event->slider_image))) {               
-                 unlink(public_path($event->slider_image));
+            if ($event->slider_image && file_exists(public_path($event->slider_image))) {
+                unlink(public_path($event->slider_image));
             }
-            $image = $request->file('slider_image');           
+            $image = $request->file('slider_image');
             $imageName = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
             if (!file_exists(public_path('upload/events'))) {
                 mkdir(public_path('upload/events'), 0777, true);
@@ -238,7 +239,7 @@ class EventController extends Controller
         $event->slider_image = $slider_img ? $slider_img : $event->slider_image;
         $event->updated_by = Auth::user()->id;
         $event->save();
-        
+
         return redirect()->route('events.list')->with('success', 'Event edited successfully!');
     }
 
@@ -278,4 +279,45 @@ class EventController extends Controller
             return redirect()->route('events.list')->with('error', "Somthing went error during delete");
         }
     }
+
+
+    // ticket manegment
+
+    public function Ticket()
+    {
+        $categories = EventBookingRequest::orderBy('created_at', 'desc')->get();
+
+        return view('admin.backend.purchase-history.request-list', compact('categories'));
+    }
+
+    public function Aprrove($id)
+    {
+        $event = EventBookingRequest::find($id);
+    
+        if (!$event) {
+            return redirect()->route('events.ticket_request')->with('error', 'Event not found');
+        }
+    
+        $event->update([
+            'status' => '2'
+        ]);
+    
+        return redirect()->route('events.ticket_request')->with('success', 'Event approved successfully');
+    }
+    
+    public function Discard($id)
+    {
+        $event = EventBookingRequest::find($id);
+           
+        if (!$event) {
+            return redirect()->route('events.ticket_request')->with('error', 'Event not found');
+        }
+    
+        $event->update([
+            'status' => '1'
+        ]);
+    
+        return redirect()->route('events.ticket_request')->with('success', 'Event discarded successfully');
+    }
+    
 }

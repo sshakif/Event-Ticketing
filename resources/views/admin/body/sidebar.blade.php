@@ -36,17 +36,32 @@
                 @endcan
 
                 @canAny(['admin'])
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow">
-                        <i class="fa-solid fa-calendar-days"></i>
-                        <span data-key="t-email">Events Management</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                       
-                        <li><a href="{{ route('events.list') }}">View Events</a></li>
-                    </ul>
-                </li>
-            @endcan
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+                            <i class="fa-solid  fa-calendar-days" style="font-size: 17px;"></i>
+                            <span data-key="t-email">Events Management</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+
+                            <li><a href="{{ route('events.list') }}">View Events</a></li>
+                        </ul>
+                    </li>
+                @endcan
+
+
+                @canAny(['admin'])
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">
+
+                            <i class="fa-solid fa-clock-rotate-left " style="font-size: 17px;"></i>
+                            <span data-key="t-email">Purchase history</span>
+                        </a>
+                        <ul class="sub-menu" aria-expanded="false">
+
+                            <li><a href="{{ route('events.ticket_request') }}">Ticket request</a></li>
+                        </ul>
+                    </li>
+                @endcan
 
         </div>
     </div>
