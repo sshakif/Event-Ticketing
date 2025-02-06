@@ -80,7 +80,7 @@
                                     <ul class="footer-widget__link-list list-unstyled">
                                         <li><a href="/terms-conditions">Terms and condition</a></li>
                                         <li><a href="/privacy-policy">Privacy and policy</a></li>
-                                        <li><a href="/events">Tickets</a></li>
+                                        <li><a href="/view-events">Tickets</a></li>
                                     
                                     </ul>
                                 </div>

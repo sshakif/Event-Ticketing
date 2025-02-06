@@ -63,7 +63,11 @@ Route::middleware('admin')->group(function(){
     Route::get('/ticket-request', [EventController::class, 'Ticket'])->name('events.ticket_request');
     Route::get('/ticket-request/approve/{id}', [EventController::class, 'Aprrove'])->name('events.approve');
     Route::get('/ticket-request/discard/{id}', [EventController::class, 'Discard'])->name('events.discard');
-    // end ticket
+    Route::get('/ticket-request/ticket_pdf/{id}', [EventController::class, 'Pdf_Generate'])->name('ticket.pdf');
+// end ticket
+
+   
+
 
 
     // role and permission

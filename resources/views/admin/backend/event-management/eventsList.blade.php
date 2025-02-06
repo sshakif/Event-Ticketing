@@ -156,7 +156,8 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                {!! $items->note !!}
+                                                {!! $items->title !!}
+                                              
                                             </div>
                                         </div>
                                     </div>

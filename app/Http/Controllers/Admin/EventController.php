@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\TicketConfirmationMail;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\EventBookingRequest;
+use App\Models\TicketInfo;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class EventController extends Controller
 {
@@ -293,31 +297,54 @@ class EventController extends Controller
     public function Aprrove($id)
     {
         $event = EventBookingRequest::find($id);
-    
+
         if (!$event) {
             return redirect()->route('events.ticket_request')->with('error', 'Event not found');
         }
-    
+
         $event->update([
             'status' => '2'
         ]);
-    
+
         return redirect()->route('events.ticket_request')->with('success', 'Event approved successfully');
     }
-    
+
     public function Discard($id)
     {
         $event = EventBookingRequest::find($id);
-           
+
         if (!$event) {
             return redirect()->route('events.ticket_request')->with('error', 'Event not found');
         }
-    
+
         $event->update([
             'status' => '1'
         ]);
-    
+
         return redirect()->route('events.ticket_request')->with('success', 'Event discarded successfully');
     }
-    
+
+
+
+
+    public function Pdf_Generate($id)
+    {
+        $find_tickt_req = EventBookingRequest::find($id);
+        $ticket_info = TicketInfo::where('req_id', $find_tickt_req->id)->get();
+
+        $data = [
+            'requestInfo' => $find_tickt_req,
+            'ticketInfo'  => $ticket_info
+        ];
+
+        $pdf = Pdf::loadView('admin.backend.purchase-history.PDF.ticket_info', $data)->setPaper([0, 0,576, 234], 'portrait');
+        // Save the PDF to a temporary file in storage path
+        $pdfPath = storage_path('app/public/generated_pdf.pdf');
+        $pdf->save($pdfPath);
+     
+        Mail::to($find_tickt_req->user_email)->send(new TicketConfirmationMail($pdfPath));
+       
+        return $pdf->download("ticket_{$find_tickt_req->user_phone}.pdf");
+        return redirect()->route('events.ticket_request')->with('success', 'Pdf generated successfully');
+    }
 }

@@ -14,7 +14,7 @@
                         
                         </div>
                         <div class="page-title-right">
-                            <a href="/event/details/{{$items->id}}"> <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#AddModal"><i class="fa-solid fa-earth-americas"></i> View
+                            <a href="/event/details/{{$items->id}}"> <button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#AddModal"><i class="fa-solid fa-earth-americas"></i> View
                             </button></a>
                         </div>
                     </div>
@@ -119,7 +119,7 @@
 
 <div class="mt-3">
     <p class="px-3">
-        {{$items->description}}
+        {!! $items->description !!}
     </p>
 </div>
 </div>

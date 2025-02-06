@@ -97,7 +97,7 @@
 
 
                                         @if ($items->status == '2')
-                                            <button class="btn-sm btn-info btn"><i class="fa-solid fa-print"></i></button>
+                                            <a href="{{route('ticket.pdf' ,$items->id)}}"><button class="btn-sm btn-info btn"><i class="fa-solid fa-print"></i></button></a>
                                         @elseif($items->status == '1')
                                             <button class="btn btn-sm btn-danger">Discarded</button>
                                         @else

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\EventBookingRequest;
+use App\Models\TicketInfo;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 
@@ -62,42 +63,53 @@ class UserController extends Controller
 
 
     // ticket request system started
-     
-    public function Request_ticket(Request $request){
-     
+
+    public function Request_ticket(Request $request)
+    {
         $request->validate([
-            'name'=>'required',           
-            'participant'=>'required',
-            'email'=>'required | email| unique:users',
-            'phone'=>'required',
-         
+            'name' => 'required',
+            'participant' => 'required',
+            'email' => 'required | email| unique:users',
+            'phone' => 'required',
+
         ]);
-       $user_info=  $user = new User();
-       
+        $user_info =  $user = new User();
+
         $user->email = $request->email;
         $user->name = $request->name;
         $user->password = $request->phone;
         $user->save();
-        
-        if($user_info){
-          $event_info = Event::find($request->event_id);
-            
-            $Ticke_Request = new EventBookingRequest();
-            $Ticke_Request->user_id = $user_info->id;
-            $Ticke_Request->event_id = $request->event_id;
-            $Ticke_Request->user_name = $user_info->name;
-            $Ticke_Request->user_email = $user_info->email;
-            $Ticke_Request->user_phone = $request->phone;
-            $Ticke_Request->event_date = $event_info->event_start_date;
-            $Ticke_Request->event_time = $event_info->event_start_time;
-            $Ticke_Request->total_participants = $request->participant;
-            $Ticke_Request->total_amount = $request->total_amount;
-            $Ticke_Request->created_by = $user_info->id;
 
-            $Ticke_Request->save();
+        if ($user_info) {
+            $event_info = Event::find($request->event_id);
+           $ticket_request = new EventBookingRequest();
+           $ticket_request->user_id = $user_info->id;
+           $ticket_request->event_id = $request->event_id;
+           $ticket_request->user_name = $user_info->name;
+           $ticket_request->user_email = $user_info->email;
+           $ticket_request->user_phone = $request->phone;
+           $ticket_request->event_date = $event_info->event_start_date;
+           $ticket_request->event_time = $event_info->event_start_time;
+           $ticket_request->total_participants = $request->participant;
+           $ticket_request->total_amount = $request->total_amount;
+           $ticket_request->created_by = $user_info->id;
+
+           $ticket_request->save();
+
+
+     
+            for ($i = 0; $i <$request->participant; $i++) {
+
+                $randomNumber = random_int(100000000000, 999999999999);
+                $create_info = new TicketInfo();
+                $create_info->req_id =$ticket_request->id;
+                $create_info->ticket_id = $randomNumber;
+                $create_info->save();
+            }
+            
         }
-       
+
+
         return Redirect::back()->with('success', 'Ticket request successfully!');
     }
-
 }
